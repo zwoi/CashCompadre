@@ -9,24 +9,14 @@
             </div>
             <div padding>
               <ion-item>
-                <ion-input
-                  type="text"
-                  placeholder="Login Name"
-                  v-model="username"
-                ></ion-input>
+                <ion-input type="text" placeholder="Login Name" v-model="username"></ion-input>
               </ion-item>
               <ion-item>
-                <ion-input
-                  type="password"
-                  placeholder="Password"
-                  v-model="password"
-                ></ion-input>
+                <ion-input type="password" placeholder="Password" v-model="password"></ion-input>
               </ion-item>
             </div>
             <div padding>
-              <ion-button size="large" @click="login" expand="block"
-                >Login</ion-button
-              >
+              <ion-button size="large" @click="login" expand="block">Login</ion-button>
             </div>
           </ion-col>
         </ion-row>
@@ -35,7 +25,7 @@
   </ion-page>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import {
   IonPage,
   IonContent,
@@ -46,24 +36,8 @@ import {
   IonButton,
   IonItem,
 } from "@ionic/vue";
-import { useLogin } from "@/composables/useLogin";
+import { useLogin } from "../composables/useLogin";
 
-export default {
-  name: "Login",
-  components: {
-    IonContent,
-    IonPage,
-    IonInput,
-    IonRow,
-    IonCol,
-    IonGrid,
-    IonButton,
-    IonItem,
-  },
+const { username, password, login } = useLogin();
 
-  setup() {
-    const { username, password, login } = useLogin();
-    return { username, password, login };
-  },
-};
 </script>

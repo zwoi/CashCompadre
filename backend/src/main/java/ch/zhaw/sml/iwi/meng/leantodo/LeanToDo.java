@@ -38,7 +38,7 @@ public class LeanToDo implements CommandLineRunner {
     @Autowired
     private ToDoRepository toDoRepository;
 
-    /*
+    
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
@@ -54,7 +54,7 @@ public class LeanToDo implements CommandLineRunner {
             }
         };
     }
-    */
+   
     @Override
     public void run(String... args) throws Exception {
         User u = new User();
