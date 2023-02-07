@@ -8,7 +8,6 @@ backend/.project
 backend/.settings
 
 *.class
-*.jar
 *.war
 *.zip
 *.tar.gz
