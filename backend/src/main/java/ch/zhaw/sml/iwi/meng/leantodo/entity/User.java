@@ -10,7 +10,14 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter 
+@NoArgsConstructor
 @Table(name="USERTABLE")
 public class User {
 
@@ -22,48 +29,5 @@ public class User {
 
     @ManyToMany
     private List<Role> roles = new ArrayList<>();
-
-    /**
-     * @return the loginName
-     */
-    public String getLoginName() {
-        return loginName;
-    }
-
-    /**
-     * @param loginName the loginName to set
-     */
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
-    }
-
-    /**
-     * @return the passwordHash
-     */
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    /**
-     * @param passwordHash the passwordHash to set
-     */
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
-    /**
-     * @return the roles
-     */
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    /**
-     * @param roles the roles to set
-     */
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
 
 }
