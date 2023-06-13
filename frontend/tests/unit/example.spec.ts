@@ -1,9 +1,10 @@
 import { mount } from '@vue/test-utils'
-import Tab1 from '@/views/Todo.vue'
+import HomePage from '@/views/HomePage.vue'
+import { describe, expect, test } from 'vitest'
 
-describe('Tab1.vue', () => {
-  it('renders tab 1 view', () => {
-    const wrapper = mount(Tab1)
-    expect(wrapper.text()).toMatch('Tab 1 page')
+describe('HomePage.vue', () => {
+  test('renders home vue', () => {
+    const wrapper = mount(HomePage)
+    expect(wrapper.text()).toMatch('Ready to create an app?')
   })
 })
