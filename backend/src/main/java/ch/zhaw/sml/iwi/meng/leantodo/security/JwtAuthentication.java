@@ -22,13 +22,13 @@ public class JwtAuthentication implements Authentication {
 
     @Override
     public String getName() {
-        return jws.getBody().getSubject();
+        return jws.getPayload().getSubject();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-        String authoritiesString = jws.getBody().get("ROLES").toString();
+        String authoritiesString = jws.getPayload().get("ROLES").toString();
         for (String role : authoritiesString.split(",")) {
             authorities.add(new SimpleGrantedAuthority(role));
         }
@@ -47,7 +47,7 @@ public class JwtAuthentication implements Authentication {
 
     @Override
     public Object getPrincipal() {
-        return jws.getBody().getSubject();
+        return jws.getPayload().getSubject();
     }
 
     @Override

@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.crypto.SecretKey;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -11,7 +13,8 @@ import org.springframework.stereotype.Service;
 import ch.zhaw.sml.iwi.meng.leantodo.entity.User;
 import ch.zhaw.sml.iwi.meng.leantodo.entity.UserRepository;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 
 @Service
 public class TokenGenerator {
@@ -36,11 +39,11 @@ public class TokenGenerator {
 
         Map<String, Object> claimsMap = new HashMap<>();
         String rolesCSV = "";
-        for(int i = 0; i < user.getRoles().size(); i++) {
+        for (int i = 0; i < user.getRoles().size(); i++) {
             String roleName = user.getRoles().get(i).getRoleName();
             rolesCSV = rolesCSV + roleName;
             userAuthResponse.getRoles().add(roleName);
-            if(i < user.getRoles().size() - 1) {
+            if (i < user.getRoles().size() - 1) {
                 rolesCSV = rolesCSV + ",";
             }
         }
@@ -50,17 +53,24 @@ public class TokenGenerator {
         Date creationDate = new Date();
         Date expirationDate = new Date(creationDate.getTime() + expiration * 1000);
 
-        String token = Jwts.builder()
-            .setClaims(new HashMap<>())
-            .setSubject(user.getLoginName())
-            .addClaims(claimsMap)
-            .setIssuedAt(creationDate)
-            .setExpiration(expirationDate)
-            .signWith(SignatureAlgorithm.HS512, secret)
-            .compact();
-        userAuthResponse.setExpiresAt(expirationDate);
-        userAuthResponse.setJwsToken(token);
-        return userAuthResponse;
+        SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
+
+        try {
+            String token = Jwts.builder()
+                    .claims().empty().add(claimsMap).and()
+                    .subject(user.getLoginName())
+                    .issuedAt(creationDate)
+                    .expiration(expirationDate)
+                    .signWith(key)
+                    .compact();
+            userAuthResponse.setExpiresAt(expirationDate);
+            userAuthResponse.setJwsToken(token);
+            return userAuthResponse;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw e;
+        }
+
     }
 
 }

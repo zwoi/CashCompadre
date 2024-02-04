@@ -2,13 +2,7 @@ package ch.zhaw.sml.iwi.meng.leantodo.security;
 
 import java.io.IOException;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.crypto.SecretKey;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +13,14 @@ import org.springframework.web.filter.GenericFilterBean;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class TokenAuthenticationFilter extends GenericFilterBean {
 
@@ -27,7 +29,6 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
     private String secret;
 
     public TokenAuthenticationFilter(String secret) {
-
         this.secret = secret;
     }
 
@@ -43,7 +44,7 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
             return;
         }
         HttpServletRequest httprequest = (HttpServletRequest) request;
-        
+
         Cookie[] cookies = httprequest.getCookies();
 
         if (cookies == null || cookies.length < 1) {
@@ -68,15 +69,10 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
 
         }
         String rawJsonWebToken = tokenCookie.getValue();
-        if (!Jwts.parser().setSigningKey(secret).isSigned(rawJsonWebToken)) {
-            LOGGER.debug("Token not signed and therefore not trustworthy!");
-            // We can stop here and abort the request. An attempt was made to log in with an
-            // unsigned token.
-            ((HttpServletResponse) response).sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token is invalid!");
-        }
+        SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
 
         try {
-            Jws<Claims> jws = Jwts.parser().setSigningKey(secret).parseClaimsJws(rawJsonWebToken);
+            Jws<Claims> jws = Jwts.parser().verifyWith(key).build().parseSignedClaims(rawJsonWebToken);
 
             // If we get here without exception, we know that the token is valid, signed and
             // has not expired. Hence, we trust it.
@@ -84,10 +80,8 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             chain.doFilter(request, response);
         } catch (Exception e) {
-            LOGGER.info("Token could not be parsed!");
-            // We can stop here and abort the request. An attempt was made to log in with an
-            // invalid token.
-            ((HttpServletResponse) response).sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token is invalid!");
+            System.out.println(e.getMessage());
+            // Not authorized so no authentication injected into the security context
         }
     }
 

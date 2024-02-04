@@ -1,8 +1,7 @@
 package ch.zhaw.sml.iwi.meng.leantodo.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Data;
 
 @Entity

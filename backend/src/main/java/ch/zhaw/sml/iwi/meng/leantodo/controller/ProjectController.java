@@ -1,6 +1,7 @@
 package ch.zhaw.sml.iwi.meng.leantodo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,15 +32,15 @@ public class ProjectController {
     }
 
     public void addToDo(Long projectId, ToDo toDo, String owner) {
-        Project project = projectRepository.getOne(projectId);
-        if(project == null || !project.getOwner().equals(owner)) {
+        Optional<Project> projectOpt = projectRepository.findById(projectId);
+        if(projectOpt.isEmpty() || !projectOpt.get().getOwner().equals(owner)) {
             return;
         }  
         // Ensure that JPA creates a new entity
         toDo.setId(null);
         toDo.setOwner(owner);
-        project.getToDos().add(toDo);
-        projectRepository.save(project);
+        projectOpt.get().getToDos().add(toDo);
+        projectRepository.save(projectOpt.get());
     }
     
 }

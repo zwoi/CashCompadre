@@ -2,8 +2,6 @@ package ch.zhaw.sml.iwi.meng.leantodo.boundary;
 
 import java.security.Principal;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ch.zhaw.sml.iwi.meng.leantodo.security.TokenGenerator;
 import ch.zhaw.sml.iwi.meng.leantodo.security.UserAuthResponse;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 @CrossOrigin
@@ -50,7 +50,7 @@ public class TokenEndpoint {
         String username = principal.getName();
         UserAuthResponse userAuthResponse = tokenGenerator.generateJWT(username);
         Cookie cookie = new Cookie("Authentication", userAuthResponse.getJwsToken());
-        
+         
         // This is essential! It must be HTTP-Only, otherwise it can be accessed by JavaScript
         cookie.setHttpOnly(true);
 

@@ -1,6 +1,7 @@
 package ch.zhaw.sml.iwi.meng.leantodo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,9 +27,9 @@ public class ToDoController {
     }
 
     public void updateToDo(ToDo toDo, String owner) {
-        ToDo orig = toDoRepository.getOne(toDo.getId());
+        Optional<ToDo> origOpt = toDoRepository.findById(toDo.getId());
         // Check if the original ToDo was present and that it belonged to the same owner
-        if(orig == null || !orig.getOwner().equals(owner)) {
+        if(origOpt.isEmpty() || !origOpt.get().getOwner().equals(owner)) {
             return;
         }
         // Ok, let's overwrite the existing toDo.
