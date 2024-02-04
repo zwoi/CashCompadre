@@ -32,22 +32,6 @@ public class LeanToDo implements CommandLineRunner {
     @Autowired
     private RoleRepository roleRepository;
 
-    
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                    // This is only really relevant for development, where we have different servers for frontend and backend
-                    .allowedOrigins("http://localhost:8100")
-                    .allowedMethods("GET", "PUT", "POST", "DELETE")
-                    // AllowCredentials is necessary, as it sets 'Access-Control-Allow-Credentials'. 
-                    // Otherwise Angular's HttpClient will not pass the Cookie back.
-                    .allowCredentials(true);
-            }
-        };
-    }
    
     @Override
     public void run(String... args) throws Exception {
