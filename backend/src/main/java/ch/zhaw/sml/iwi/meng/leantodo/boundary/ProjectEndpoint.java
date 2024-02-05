@@ -25,13 +25,13 @@ public class ProjectEndpoint {
     private ProjectController projectController;
 
     @RequestMapping(path = "/api/project", method = RequestMethod.GET)
-    @PreAuthorize("isAuthenticated() AND hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     public List<Project> getProjects(Principal principal) {
         return projectController.listAllProjects(principal.getName());
     }
     
     @RequestMapping(path = "/api/project/{id}", method = RequestMethod.POST)
-    @PreAuthorize("isAuthenticated() AND hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     public void addToDo(@RequestParam(name="id") Long projectId, @RequestBody ToDo toDo,  Principal principal) {
         projectController.addToDo(projectId, toDo, principal.getName());
     }

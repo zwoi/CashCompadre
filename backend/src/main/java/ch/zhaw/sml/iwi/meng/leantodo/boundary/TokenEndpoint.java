@@ -23,21 +23,21 @@ public class TokenEndpoint {
     private TokenGenerator tokenGenerator;
 
     @RequestMapping(path = "/auth/token", method = RequestMethod.GET)
-    @PreAuthorize("isAuthenticated() AND hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     public UserAuthResponse token(Principal principal, HttpServletResponse response) {
         return createTokenSetCookie(principal,response);
     }
 
     // The same functionality as '/auth/token' but authenticated by token instead of basic security
     @RequestMapping(path = "/auth/refresh", method = RequestMethod.GET)
-    @PreAuthorize("isAuthenticated() AND hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     public UserAuthResponse refresh(Principal principal, HttpServletResponse response) {
         return createTokenSetCookie(principal,response);
     }
 
     // If logout is desired, we replace the client token without content and set its expiration time to 0
     @RequestMapping(path = "/auth/logout", method = RequestMethod.GET)
-    @PreAuthorize("isAuthenticated() AND hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     public void logout(Principal principal, HttpServletResponse response) {
         Cookie cookie = new Cookie("Authentication", null);
         cookie.setHttpOnly(true);

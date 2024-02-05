@@ -22,19 +22,19 @@ public class ToDoEndpoint {
     private ToDoController toDoController;
 
     @RequestMapping(path = "/api/todo", method = RequestMethod.GET)
-    @PreAuthorize("isAuthenticated() AND hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     public List<ToDo> toDo(Principal principal) {
         return  toDoController.listAllToDos(principal.getName());        
     }
 
     @RequestMapping(path = "/api/todo", method = RequestMethod.POST)
-    @PreAuthorize("isAuthenticated() AND hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     public void addToDo(@RequestBody ToDo newToDo, Principal principal) {
         toDoController.persistToDo(newToDo, principal.getName());
     }
     
     @RequestMapping(path = "/api/todo", method = RequestMethod.PUT)
-    @PreAuthorize("isAuthenticated() AND hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     public void updateToDo(@RequestBody ToDo toDo, Principal principal) {
         toDoController.updateToDo(toDo, principal.getName());
     }

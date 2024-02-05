@@ -52,8 +52,11 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChainAuthBasic(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-            .cors(Customizer.withDefaults())
+        http.headers(headers -> headers
+                .frameOptions(frameOptions -> frameOptions
+                        .sameOrigin()))
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults())
                 // .cors(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer
@@ -62,6 +65,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         (authz) -> authz
                                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                                .requestMatchers("/console").permitAll()
                                 .anyRequest().authenticated());
 
         return http.build();
@@ -76,7 +80,7 @@ public class SecurityConfig {
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
-            CorsConfiguration configuration = new CorsConfiguration();
+        CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
         configuration.setAllowedMethods(Arrays.asList("*"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
