@@ -13,11 +13,8 @@ import ch.zhaw.sml.iwi.meng.leantodo.entity.ToDo;
 @Component
 public class ProjectController {
 
-
     @Autowired
     private ProjectRepository projectRepository;
-
-
 
     public List<Project> listAllProjects(String loginName) {
         return projectRepository.findByOwner(loginName);
@@ -33,14 +30,14 @@ public class ProjectController {
 
     public void addToDo(Long projectId, ToDo toDo, String owner) {
         Optional<Project> projectOpt = projectRepository.findById(projectId);
-        if(projectOpt.isEmpty() || !projectOpt.get().getOwner().equals(owner)) {
+        if (projectOpt.isEmpty() || !projectOpt.get().getOwner().equals(owner)) {
             return;
-        }  
+        }
         // Ensure that JPA creates a new entity
         toDo.setId(null);
         toDo.setOwner(owner);
         projectOpt.get().getToDos().add(toDo);
         projectRepository.save(projectOpt.get());
     }
-    
+
 }

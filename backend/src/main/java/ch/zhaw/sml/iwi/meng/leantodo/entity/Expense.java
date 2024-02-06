@@ -1,9 +1,6 @@
 package ch.zhaw.sml.iwi.meng.leantodo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.time.LocalDate;
-
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +13,7 @@ import lombok.Data;
 @Entity
 @Data
 public class Expense {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
