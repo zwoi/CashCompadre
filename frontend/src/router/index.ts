@@ -18,19 +18,19 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '',
-        redirect: '/tabs/tab1'
+        redirect: '/tabs/Dashboard'
       },
       {
-        path: 'todo',
-        component: () => import('@/views/Todo.vue')
+        path: 'Dashboard',
+        component: () => import('@/views/Dashboard.vue')
       },
       {
-        path: 'projects',
-        component: () => import('@/views/Projects.vue')
+        path: 'Categories',
+        component: () => import('@/views/Categories.vue')
       },
       {
-        path: 'timerecord',
-        component: () => import('@/views/Timerecord.vue')
+        path: 'User',
+        component: () => import('@/views/User.vue')
       }
     ]
   }

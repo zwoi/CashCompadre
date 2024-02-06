@@ -5,7 +5,7 @@
           <ion-row justify-content-center>
             <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
               <ion-col>
-                <img class="logo" src="../../public/images/logo.png" alt="LeanTodo logo" />
+                <img class="logo" src="/images/logo.png" alt="LeanTodo logo" />
               </ion-col>
               <div>
                 <h1 class="title">LeanTodo login</h1>
@@ -66,5 +66,7 @@ ion-item{
 .img{
   border-radius: 5px;
 }
+
+
 
 </style>
