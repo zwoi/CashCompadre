@@ -17,8 +17,7 @@ import ch.zhaw.sml.iwi.meng.leantodo.entity.UserRepository;
 
 @Component
 public class CategoryController {
-    private static final Logger LOGGER = Logger.getLogger( ClassName.class.getName() );
-
+    private static final Logger LOGGER = Logger.getLogger(ClassName.class.getName());
 
     @Autowired
     private UserRepository userRepository;
@@ -35,12 +34,12 @@ public class CategoryController {
         User user = userRepository.findById(loginName).get();
         // Check if category is owned by user
         Category category = null;
-        for (Category c: user.getCategories()) {
-            if(c.getId() == categoryId) {
+        for (Category c : user.getCategories()) {
+            if (c.getId() == categoryId) {
                 category = c;
             }
         }
-        if(category == null) {
+        if (category == null) {
             LOGGER.log(Level.WARNING, "User " + loginName + " tried to add expenses to another user's category");
             throw new IllegalArgumentException("This category does not belong to the user.");
         } else {
@@ -51,5 +50,26 @@ public class CategoryController {
         }
     }
     
+
+    public void deleteExpense(String loginName, Long categoryId, Long expenseId) {
+        LOGGER.log(Level.INFO,
+                "User " + loginName + " is deleting expense " + expenseId + " from category " + categoryId);
+        User user = userRepository.findById(loginName).get();
+        // Check if category is owned by user
+        Category category = null;
+        for (Category c : user.getCategories()) {
+            if (c.getId() == categoryId) {
+                category = c;
+            }
+        }
+        // Check if expense exists in the category
+        Expense expense = category.getExpenses().stream()
+                .filter(e -> e.getId().equals(expenseId))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Expense not found in the category."));
+        // Remove the expense and save the category
+        category.getExpenses().remove(expense);
+        categoryRepository.save(category);
+    }
 
 }

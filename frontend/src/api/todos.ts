@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_ROOT } from "@/config/development";
-import { ToDo } from '@/model/todo';
+import { ToDo } from '@/model/category';
 
 export async function getAllToDos(): Promise<ToDo[]>   { 
     const config = {        
