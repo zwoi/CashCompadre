@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import listitem from "../components/ListItem.vue"
 import { useRoute } from 'vue-router';
-import { IonPage, IonHeader, IonTitle, IonContent, IonToolbar, IonFab, IonFabButton, IonList } from '@ionic/vue';
+import { IonPage, IonHeader, IonTitle, IonContent, IonToolbar, IonFab, IonFabButton, IonList, IonBackButton, IonButtons } from '@ionic/vue';
 const route = useRoute();
 console.log(route.params.id);
-const Category = route.params.id;
+const category = route.params.id;
 </script>
 
 <template>
@@ -13,17 +13,17 @@ const Category = route.params.id;
 
             <ion-header>
                 <ion-toolbar>
-                    <ion-title>{{ Category }}</ion-title>
+                    <ion-buttons slot="start">
+                        <ion-back-button> </ion-back-button>
+                    </ion-buttons>
+                    <ion-title>{{ category }}</ion-title>
                 </ion-toolbar>
             </ion-header>
-            
-            <ion-list>
-                <listitem title="Test" link="/categories/food"></listitem>
-            </ion-list>
+
+
         </ion-content>
 
     </ion-page>
-    <h1></h1>
 </template>
 
 

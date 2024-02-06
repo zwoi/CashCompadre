@@ -14,6 +14,14 @@ export function useExpenses(){
             console.log(error); // FIXME: Errorhandling
         }
     }
+
+    const getExpense = async () => {
+        try {
+            expenses.value = await getExpenses();
+        } catch (error) {
+            console.log(error); // FIXME: Errorhandling
+        }
+    }
     
 
     return { expenses, getExpenses };

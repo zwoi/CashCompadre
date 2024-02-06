@@ -16,12 +16,12 @@ export  async function getAllCategories() {
     }
   }
 
-  export  async function getCategory() {
+  export  async function getCategory(category:String) {
     const config = {        
         withCredentials: true
     }
     try {
-        const response = await axios.get(API_ROOT+"/api/categories", config);
+        const response = await axios.get(API_ROOT+"/api/categories/"+category, config);
         console.log(response);
         return response;
     } catch (error) {
@@ -29,7 +29,7 @@ export  async function getAllCategories() {
     }
   }
 
-  export  async function addCategory() {
+  export  async function addCategory(category:Category) {
     const config = {        
         withCredentials: true
     }

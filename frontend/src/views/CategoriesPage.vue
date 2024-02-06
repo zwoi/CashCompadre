@@ -16,7 +16,8 @@ import {
   IonFab,
   IonFabButton,
   IonLabel,
-  IonAlert
+  IonAlert,
+  IonBackButton
 
 } from "@ionic/vue";
 import { useTodos } from "../composables/useTodos";
@@ -26,7 +27,7 @@ import { useCategory } from '../composables/useCategory';
 const text = ref('hello');
 const { categories, getCategories } = useCategory();
 import { add } from 'ionicons/icons';
-const Categories = ref([]);
+
 
 const alertButtons = ['OK'];
 const alertInputs = [
@@ -58,15 +59,16 @@ const alertInputs = [
       <ion-header>
         <ion-toolbar>
           <ion-title>Categories</ion-title>
+          
         </ion-toolbar>
       </ion-header>
       <ion-button v-on:click="getCategories"></ion-button>
       <ion-list>
 
-        <ion-item :router-link="'/tabs/categories/test'" button>
+        <ion-item :router-link="'/tabs/categories/test'">
           <ion-label>Test</ion-label>
         </ion-item>
-        <ion-item v-for="category in categories" :key="category.id">
+        <ion-item v-for="category in categories" :key="category.id" :router-link="'/tabs/categories/'+category.title">
           <ion-label>{{ category.title }}</ion-label>
         </ion-item>
       </ion-list>
@@ -81,11 +83,24 @@ const alertInputs = [
     header="Please enter your info"
     :buttons="alertButtons"
     :inputs="alertInputs"
+    
   ></ion-alert>
     </ion-content>
   </ion-page>
 </template>
 <style scoped>
-ion-list {}
+  ion-alert {
+    --color:white;
+  }
+  ion-alert .inputs {
+    --color:white;
+  }
+  ion-alert .input-wrapper {
+    --color:white;
+  }
+  .alert-input {
+    color:white !important;
+  }
+  
 </style>
   

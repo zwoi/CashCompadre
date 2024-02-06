@@ -25,7 +25,7 @@ const { newTodo, todos, getTodos, addTodo, finishTodo, archiveTodo } = useTodos(
     <ion-content>
       <ion-header>
         <ion-toolbar>
-          <ion-title>Todos</ion-title>
+          <ion-title>Profile</ion-title>
         </ion-toolbar>
       </ion-header>
       <p>Was  geht </p>
