@@ -49,7 +49,6 @@ public class CategoryController {
             categoryRepository.save(category);
         }
     }
-    
 
     public void deleteExpense(String loginName, Long categoryId, Long expenseId) {
         LOGGER.log(Level.INFO,
@@ -72,4 +71,26 @@ public class CategoryController {
         categoryRepository.save(category);
     }
 
+    public void updateExpense(String loginName, Long categoryId, Long expenseId, Expense updatedExpense) {
+        LOGGER.log(Level.INFO,
+                "User " + loginName + " is updating expense " + expenseId + " in category " + categoryId);
+        User user = userRepository.findById(loginName).get();
+        // Check if category is owned by user
+        Category category = null;
+        for (Category c : user.getCategories()) {
+            if (c.getId() == categoryId) {
+                category = c;
+            }
+        }
+        // Check if expense exists in the category
+        Expense expenseToUpdate = category.getExpenses().stream()
+                .filter(e -> e.getId().equals(expenseId))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Expense not found in the category."));
+        // Update the expense with the values from updatedExpense
+        expenseToUpdate.setNote(updatedExpense.getNote());
+        expenseToUpdate.setAmount(updatedExpense.getAmount());
+        // Save the category with the updated expense
+        categoryRepository.save(category);
+    }
 }
