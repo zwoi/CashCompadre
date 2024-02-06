@@ -3,17 +3,17 @@
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="todo" href="/tabs/todo">
+        <ion-tab-button tab="todo" href="/tabs/Dashboard">
           <ion-icon :icon="homeSharp" />
           <ion-label>Dashboard</ion-label>
         </ion-tab-button>
           
-        <ion-tab-button tab="projects" href="/tabs/projects">
+        <ion-tab-button tab="projects" href="/tabs/Categories">
           <ion-icon :icon="fileTrayFullSharp" />
           <ion-label>Category</ion-label>
         </ion-tab-button>
         
-        <ion-tab-button tab="timerecord" href="/tabs/timerecord">
+        <ion-tab-button tab="timerecord" href="/tabs/User">
           <ion-icon :icon="personCircleSharp" />
           <ion-label>Profile</ion-label>
         </ion-tab-button>
