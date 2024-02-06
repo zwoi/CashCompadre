@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -56,4 +57,18 @@ public class CategoryEndpoint {
         }
     }
 
+    @PutMapping("/api/categories/{id}/expenses/{expenseId}")
+    public ResponseEntity<Void> updateExpense(
+            Principal principal,
+            @PathVariable(name = "id") Long categoryId,
+            @PathVariable(name = "expenseId") Long expenseId,
+            @RequestBody Expense updatedExpense) {
+
+        try {
+            categoryController.updateExpense(principal.getName(), categoryId, expenseId, updatedExpense);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
 }
