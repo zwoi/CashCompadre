@@ -15,18 +15,21 @@ import {
 } from "@ionic/vue";
 import { useTodos } from "../composables/useTodos";
 import { ref } from "vue";
-const text = ref('hello');
+const text = ref('!');
 const { newTodo, todos, getTodos, addTodo, finishTodo, archiveTodo } = useTodos();
-import {add} from 'ionicons/icons'; 
+
 </script>
 
 <template>
-  <h1>test</h1>
-    <IonButton>{{ text }}</IonButton>
-    <ion-fab>
-    <ion-fab-button>
-      <ion-icon :icon="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+  <ion-page>
+  <ion-content>
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>Dashboard</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <p>dash </p>
+    </ion-content>
+</ion-page>
 </template>
   
