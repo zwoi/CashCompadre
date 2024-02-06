@@ -6,16 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import ch.zhaw.sml.iwi.meng.leantodo.entity.Category;
-import ch.zhaw.sml.iwi.meng.leantodo.entity.CategoryRepository;
+import ch.zhaw.sml.iwi.meng.leantodo.entity.UserRepository;
 
 @Component
 public class CategoryController {
 
     @Autowired
-    private CategoryRepository categoryRepository;
+    private UserRepository userRepository;
 
     public List<Category> listAllCategories(String loginName) {
-        return categoryRepository.findByName(loginName);
+        return userRepository.findById(loginName).get().getCategories();
     }
 
 }
