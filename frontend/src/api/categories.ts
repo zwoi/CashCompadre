@@ -11,7 +11,7 @@ export  async function getAllCategories() : Promise<Category[]>{
         withCredentials: true
     }
     try {
-        const response = await fetch(API_ROOT+"/api/category");
+        const response = await fetch(API_ROOT+"/api/categories");
         return response.json();
     } catch (error) {
         return <any>error;   

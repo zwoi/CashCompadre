@@ -35,6 +35,7 @@ const Categories = ref([]);
             <ion-title>Categories</ion-title>
         </ion-toolbar>
     </ion-header>
+    <ion-button v-on:click="getCategories"></ion-button>
     <ion-list>
       
       <ion-item :router-link="'/tabs/categories/test'" button >
