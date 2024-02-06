@@ -26,17 +26,16 @@ public class UserEndpoint {
     @RequestMapping(path = "/api/me", method = RequestMethod.GET, produces = "application/json")
     @PreAuthorize("hasRole('USER')")
     public String me(Principal principal) {
-    
+
         return "{\"user\": \"" + principal.getName() + "\"} ";
     }
 
     @RequestMapping(path = "/auth/user", method = RequestMethod.POST, produces = "application/json")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Void> addNewUser(@RequestBody NewUserDTO newUser, Principal principal) {
-    
+
         userController.addNewUser(newUser.getLoginName(), newUser.getPassword());
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
 }
