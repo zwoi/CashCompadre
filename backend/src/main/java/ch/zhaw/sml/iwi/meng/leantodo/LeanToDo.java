@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import ch.zhaw.sml.iwi.meng.leantodo.controller.UserController;
 import ch.zhaw.sml.iwi.meng.leantodo.entity.Role;
 import ch.zhaw.sml.iwi.meng.leantodo.entity.RoleRepository;
 import ch.zhaw.sml.iwi.meng.leantodo.entity.User;
@@ -29,10 +30,13 @@ public class LeanToDo implements CommandLineRunner {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private UserController userController;
+
    
     @Override
     public void run(String... args) throws Exception {
-        User u = new User();
+       /*  User u = new User();
         u.setLoginName("user");
         u.setPasswordHash(new BCryptPasswordEncoder().encode("user"));
         Role r = new Role();
@@ -40,5 +44,7 @@ public class LeanToDo implements CommandLineRunner {
         roleRepository.save(r);
         u.getRoles().add(r);
         userRepository.save(u);
+        */
+        userController.addNewUser("user", "user");
     }
 }
