@@ -1,5 +1,5 @@
 import { getAllToDos, updateToDo, addNewToDo } from '@/api/todos';
-import { ToDo } from '@/model/todo';
+import { ToDo } from '@/model/category';
 import { onMounted, ref } from 'vue';
 
 export function useTodos() {
