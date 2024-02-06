@@ -21,6 +21,15 @@ const { newTodo, todos, getTodos, addTodo, finishTodo, archiveTodo } = useTodos(
 </script>
 
 <template>
-    <IonButton>{{ text }}</IonButton>
+  <ion-page>
+    <ion-content>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Todos</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <p>Was  geht </p>
+    </ion-content>
+  </ion-page>
 </template>
   
