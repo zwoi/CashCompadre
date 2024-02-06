@@ -3,7 +3,7 @@ http://ionicframework.com/docs/theming/ */
 
 /** Ionic CSS Variables **/
 :root {
-  --ion-background-color: #4BC48D;
+  --ion-background-color: #787d76;
   /** primary **/
   
   --ion-color-primary: #3880ff;
@@ -199,7 +199,7 @@ http://ionicframework.com/docs/theming/ */
    */
 
   .md body {
-    --ion-background-color: #4CC28B;
+    --ion-background-color: #787d76;
     --ion-background-color-rgb: 18,18,18;
 
     --ion-text-color: #ffffff;

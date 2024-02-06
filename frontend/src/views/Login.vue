@@ -63,5 +63,8 @@ ion-item{
   --border-radius: 5px;
   padding-bottom: 10px;
 }
+.img{
+  border-radius: 5px;
+}
 
 </style>
