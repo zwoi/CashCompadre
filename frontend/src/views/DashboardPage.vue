@@ -15,12 +15,15 @@ import {
   IonFab,
   IonFabButton,
   IonIcon,
+  IonAlert,
 } from "@ionic/vue";
 
 import { ref } from "vue";
 import { add } from 'ionicons/icons';
+import { useExpenses } from "@/composables/useExpenses";
+const {expenses, addExpense} = useExpenses();
 const text = ref('!');
-const alertButtons = ['OK','Ich bin ein HS'];
+const alertButtons = ['OK'];
 const alertInputs = [
   {
     placeholder: 'Name',

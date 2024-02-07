@@ -2,12 +2,12 @@
 import listitem from "../components/ListItem.vue"
 import { useRoute } from 'vue-router';
 import { IonPage,IonButton, IonHeader,IonItem,IonLabel, IonTitle, IonContent, IonToolbar, IonFab, IonFabButton, IonList, IonBackButton, IonButtons } from '@ionic/vue';
-import { useExpenses } from "@/composables/useExpenses";
+import { useExpenses} from "@/composables/useExpenses";
 import { useCategory } from "@/composables/useCategory";
 import { onMounted } from "vue";
 const route = useRoute();
 console.log(route.params.id);
-const {expenses} = useExpenses();
+
 const categorytitle = route.params.id as string;
 const { categories, category, getOneCategory, getCategories } = useCategory();
 onMounted(() => {

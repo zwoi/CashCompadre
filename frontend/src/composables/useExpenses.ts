@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import { Expense } from '@/model/expense';
-import { } from '@/api/expenses';
+import { addanExpense } from '@/api/expenses';
 
 export function useExpenses() {
 
@@ -14,10 +14,17 @@ export function useExpenses() {
             console.log(error); // FIXME: Errorhandling
         } */
     }
+    const addExpense = async (e:Expense, id:number) => {
+         try {
+             expenses.value = await addanExpense(e,id);
+         } catch (error) {
+             console.log(error); // FIXME: Errorhandling
+         }
+     }
 
 
 
 
-    return { expenses, getExpenses };
+    return { expenses, getExpenses, addExpense };
 
 }
