@@ -29,6 +29,22 @@ public class CategoryEndpoint {
         return categoryController.listAllCategories(principal.getName());
     }
 
+    @GetMapping("/api/categories/{name}")
+    public Category getMyCategoryByName(@PathVariable String name, Principal principal) {
+        return categoryController.getCategoryByNameAndUser(name, principal.getName());
+    }
+
+    @PostMapping("/api/categories")
+    public ResponseEntity<String> createCategory(@RequestBody Category category, Principal principal) {
+        try {
+            String username = principal.getName();
+            categoryController.createCategory(category, username);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/api/categories/{id}")
     public ResponseEntity<Void> addExpense(
             Principal principal,

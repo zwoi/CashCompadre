@@ -2,6 +2,7 @@ package ch.zhaw.sml.iwi.meng.leantodo.controller;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,8 +30,25 @@ public class CategoryController {
         return userRepository.findById(loginName).get().getCategories();
     }
 
+    public Category getCategoryByNameAndUser(String categoryName, String loginName) {
+        User user = userRepository.findById(loginName).orElse(null);
+        if (user != null) {
+            Optional<Category> categoryOptional = user.getCategories().stream()
+                    .filter(category -> category.getName().equals(categoryName))
+                    .findFirst();
+    
+            return categoryOptional.orElse(null);
+        }
+        return null;
+    }    
+
+    public void createCategory(Category category, String loginName) {
+        User user = userRepository.findById(loginName).get();
+        categoryRepository.save(category);
+    }
+
     public void addExpense(String loginName, Long categoryId, Expense expense) {
-        LOGGER.log(Level.INFO, "User " + loginName + " is adding expesnes to category " + categoryId + ": " + expense);
+        LOGGER.log(Level.INFO, "User " + loginName + " is adding expenses to category " + categoryId + ": " + expense);
         User user = userRepository.findById(loginName).get();
         // Check if category is owned by user
         Category category = null;

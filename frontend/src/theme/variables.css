@@ -4,6 +4,9 @@ http://ionicframework.com/docs/theming/ */
 /** Ionic CSS Variables **/
 :root {
   --ion-background-color: #787d76;
+  --ion-font-color:white;
+  --text-input-placeholder-color: white;
+  --text-alert-input-placeholder-color: white;
   /** primary **/
   
   --ion-color-primary: #4cc28b;
