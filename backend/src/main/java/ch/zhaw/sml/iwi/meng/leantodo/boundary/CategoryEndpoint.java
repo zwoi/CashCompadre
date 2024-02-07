@@ -29,6 +29,11 @@ public class CategoryEndpoint {
         return categoryController.listAllCategories(principal.getName());
     }
 
+    @GetMapping("/api/categories/{name}")
+    public Category getMyCategoryByName(@PathVariable String name, Principal principal) {
+        return categoryController.getCategoryByNameAndUser(name, principal.getName());
+    }
+
     @PostMapping("/api/categories")
     public ResponseEntity<String> createCategory(@RequestBody Category category, Principal principal) {
         try {
