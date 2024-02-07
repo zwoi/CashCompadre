@@ -10,7 +10,7 @@ export  async function getAllCategories() {
     try {
         const response = await axios.get(API_ROOT+"/api/categories", config);
         console.log(response);
-        return response;
+        return response.data;
     } catch (error) {
         return <any>error;   
     }
