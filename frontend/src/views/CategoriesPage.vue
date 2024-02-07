@@ -45,9 +45,9 @@ onMounted(() => {
         </ion-item>
       </ion-list>
 
-      <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+      <ion-fab slot="fixed" vertical="bottom" horizontal="center">
 
-        <ion-fab-button color:primary id="present-alert">
+        <ion-fab-button id="present-alert">
           <ion-icon :icon="add"></ion-icon>
         </ion-fab-button>
 
