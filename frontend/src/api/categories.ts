@@ -41,3 +41,15 @@ export  async function getAllCategories() {
             return <any>error;   
         }
 } 
+export async function deleteaCategory(id:number) {
+    const config = {        
+        withCredentials: true,
+    }
+    try {
+        const response = await axios.delete(API_ROOT+"/api/categories/"+id, config);
+        console.log(response);
+        return response;
+    } catch (error) {
+        return <any>error;   
+    }
+} 

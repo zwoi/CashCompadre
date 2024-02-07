@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import { Expense } from '@/model/expense';
-import { getAllCategories, getCategory, addCategory} from '@/api/categories';
+import { getAllCategories, getCategory, addCategory, deleteaCategory} from '@/api/categories';
 import { Category } from '@/model/category';
 
 export function useCategory(){
@@ -34,5 +34,15 @@ export function useCategory(){
         }
     }
 
-    return { categories, category, getCategories, getOneCategory, addNewCategory };
+    const deleteCategory = async (id: number) => {
+        try {
+            //const response = await deleteCategory(id);
+            deleteaCategory(id);
+            console.log("Category deleted");
+        } catch (error) {
+            console.log(error); // FIXME: Errorhandling
+        }
+    }
+
+    return { categories, category, getCategories, getOneCategory, addNewCategory,deleteCategory };
 }

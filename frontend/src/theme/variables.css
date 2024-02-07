@@ -3,6 +3,7 @@ http://ionicframework.com/docs/theming/ */
 
 /** Ionic CSS Variables **/
 :root {
+  --ion-text-color: #ffffff;
   --ion-background-color: #787d76;
   --ion-font-color:white;
   --text-input-placeholder-color: white;
@@ -88,6 +89,7 @@ http://ionicframework.com/docs/theming/ */
    */
 
   body {
+    --ion-text-color: #ffffff;
     --ion-color-primary: #428cff;
     --ion-color-primary-rgb: 66,140,255;
     --ion-color-primary-contrast: #ffffff;
