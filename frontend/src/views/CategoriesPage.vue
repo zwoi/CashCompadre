@@ -47,14 +47,14 @@ onMounted(() => {
 
       <ion-fab slot="fixed" vertical="bottom" horizontal="center">
 
-        <ion-fab-button id="present-alert">
+        <ion-fab-button id="addcategory-alert">
           <ion-icon :icon="add"></ion-icon>
         </ion-fab-button>
 
       </ion-fab>
 
       <ion-alert 
-        trigger="present-alert" header="Please enter your info"
+        trigger="addcategory-alert" header="Please enter your info"
         :buttons="alertButtons"
         :inputs="alertInputs">
       </ion-alert>

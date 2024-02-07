@@ -69,12 +69,14 @@ const alertInputs = [
         </ion-toolbar>
     </ion-header>
     <ion-fab slot="fixed" vertical="bottom" horizontal="end"> 
-    <ion-fab-button id="present-alert">
+    <ion-fab-button id="addexpense-alert">
           <ion-icon :icon="add"></ion-icon>
         </ion-fab-button>
       </ion-fab>
-      <ion-alert trigger="present-alert" header="Please enter your info" :buttons="alertButtons"
-        :inputs="alertInputs"></ion-alert>
+      <ion-alert trigger="addexpense-alert" header="Please enter your info" 
+        :buttons="alertButtons"
+        :inputs="alertInputs">
+      </ion-alert>
     </ion-content>
   
 </ion-page>
