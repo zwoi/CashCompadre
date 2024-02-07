@@ -65,11 +65,9 @@ const alertInputs = [
       <ion-button v-on:click="getCategories"></ion-button>
       <ion-list>
 
-        <ion-item :router-link="'/tabs/categories/test'">
-          <ion-label>Test</ion-label>
-        </ion-item>
-        <ion-item v-for="category in categories" :key="category.id" :router-link="'/tabs/categories/'+category.title">
-          <ion-label>{{ category.title }}</ion-label>
+        
+        <ion-item v-for="category in categories" :key="category.id" :router-link="'/tabs/categories/'+category.name">
+          <ion-label>{{ category.name }}</ion-label>
         </ion-item>
       </ion-list>
       <ion-fab slot="fixed" vertical="bottom" horizontal="end">
