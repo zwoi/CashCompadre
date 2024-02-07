@@ -22,13 +22,11 @@ import {
 } from "@ionic/vue";
 import { useTodos } from "../composables/useTodos";
 import { ref } from "vue";
-
+import { add } from 'ionicons/icons';
 import { useCategory } from '../composables/useCategory';
+import { onMounted } from 'vue';
 const text = ref('hello');
 const { categories, getCategories } = useCategory();
-import { add } from 'ionicons/icons';
-
-
 const alertButtons = ['OK'];
 const alertInputs = [
   {
@@ -51,6 +49,9 @@ const alertInputs = [
     placeholder: 'percentage',
   },
 ];
+onMounted(() => {
+  getCategories();
+});
 </script>
 
 <template>
@@ -59,14 +60,14 @@ const alertInputs = [
       <ion-header>
         <ion-toolbar>
           <ion-title>Categories</ion-title>
-          
+
         </ion-toolbar>
       </ion-header>
       <ion-button v-on:click="getCategories"></ion-button>
       <ion-list>
 
-        
-        <ion-item v-for="category in categories" :key="category.id" :router-link="'/tabs/categories/'+category.name">
+
+        <ion-item v-for="category in categories" :key="category.id" :router-link="'/tabs/categories/' + category.name">
           <ion-label>{{ category.name }}</ion-label>
         </ion-item>
       </ion-list>
@@ -76,27 +77,22 @@ const alertInputs = [
           <ion-icon :icon="add"></ion-icon>
         </ion-fab-button>
       </ion-fab>
-      <ion-alert
-    trigger="present-alert"
-    header="Please enter your info"
-    :buttons="alertButtons"
-    :inputs="alertInputs"
-    
-  ></ion-alert>
+      <ion-alert trigger="present-alert" header="Please enter your info" :buttons="alertButtons"
+        :inputs="alertInputs"></ion-alert>
     </ion-content>
   </ion-page>
 </template>
 <style scoped>
-  ion-alert {
-    --color:white;
-  }
-  ion-alert .inputs {
-    --color:white;
-  }
-  ion-alert .input-wrapper {
-    --color:white;
-  }
- 
-  
+ion-alert {
+  --color: white;
+}
+
+ion-alert .inputs {
+  --color: white;
+}
+
+ion-alert .input-wrapper {
+  --color: white;
+}
 </style>
   
