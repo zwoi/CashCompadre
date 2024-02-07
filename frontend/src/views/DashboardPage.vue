@@ -74,7 +74,7 @@ const alertInputs = [
           <ion-icon :icon="add"></ion-icon>
         </ion-fab-button>
       </ion-fab>
-      <ion-alert trigger="addexpense-alert" header="Please enter your info" 
+      <ion-alert trigger="addexpense-alert" header="Add a new Expense!" 
         :buttons="alertButtons"
         :inputs="alertInputs">
       </ion-alert>

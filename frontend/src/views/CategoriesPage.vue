@@ -19,7 +19,8 @@ import {
   IonAlert,
   IonBackButton,
   IonNote,
-  alertController,} from "@ionic/vue";
+  alertController,
+} from "@ionic/vue";
 
 import { ref } from "vue";
 import {
@@ -29,33 +30,32 @@ import {
   fastFoodOutline,
   homeOutline,
   starOutline,
-trashBinOutline
+  trashBinOutline
 } from 'ionicons/icons';
 import { useCategory } from '../composables/useCategory';
 import { onMounted } from 'vue';
 import { Category } from "@/model/category";
-import { addCategory } from "@/api/categories";
+const { categories, getCategories, addNewCategory, deleteCategory, updateCategory } = useCategory();
+
+
 const CategoryToAdd = ref<Category>();
 const CategoryToUpdate = ref<Category>();
 CategoryToAdd.value = {
-  name: 'hello',
-  limitamount: 0,
+  name: "test",
+  limitamount: 100,
 };
-CategoryToUpdate.value={
+CategoryToUpdate.value = {
   name: "",
   limitamount: 0,
 };
 
 
-const { categories, getCategories, addNewCategory, deleteCategory, updateCategory } = useCategory();
 
-const alertaddCategoryButtons = [{
-          text: 'Action',
-          handler: () => addCategory(CategoryToAdd.value as Category),
-            }];
+
 const alertaddCategoryInputs = [
   {
-    placeholder: 'Category Name',
+    placeholder: 'Category Name7777',
+    type: 'text',
     name: 'Category Name',
     value: CategoryToAdd.value.name,
   },
@@ -67,7 +67,7 @@ const alertaddCategoryInputs = [
   },
 ];
 const alertupdateCategoryInputs = [
-{
+  {
     placeholder: 'Category Name',
     name: 'Category Name',
     value: CategoryToUpdate.value.name,
@@ -80,14 +80,18 @@ const alertupdateCategoryInputs = [
   },
 ];
 const alertupdateCategoryButtons = [{
-          text: 'Action',
-          handler: () => updateCategory(CategoryToUpdate.value as Category,1),
-            }];
+  text: 'Action',
+  handler: () => updateCategory(CategoryToUpdate.value as Category, 1),
+}];
+const alertaddCategoryButtons = [{
+  text: 'Action',
+  handler: () => addNewCategory(CategoryToAdd.value as Category) ,
+}];
 
 onMounted(() => {
   getCategories();
 });
-let showUpdateAlert=ref(false);
+let showUpdateAlert = ref(false);
 
 function setOpen(value: boolean) {
   showUpdateAlert.value = value;
@@ -97,12 +101,12 @@ function openUpdateAlert() {
   setOpen(true);
 
 }
-function triggerdeleteFunction(id:number) {
+function triggerdeleteFunction(id: number) {
   event?.preventDefault();
-  deleteCategory(1)
-//funktioniert nicht
-  
-  
+  deleteCategory(id);
+  //funktioniert nicht
+
+
 
 
 }
@@ -117,39 +121,38 @@ function triggerdeleteFunction(id:number) {
         </ion-toolbar>
       </ion-header>
 
-      <ion-list lines="inset" :inset="true"  >
-        
-        <ion-item class="ion-justify-content-between" v-for="category in categories" :key="category.id" :router-link="'/tabs/categories/' + category.name">
-        
+      <ion-list lines="inset" :inset="true">
+
+        <ion-item class="ion-justify-content-between" v-for="category in categories" :key="category.id"
+          :router-link="'/tabs/categories/' + category.name">
+
           <ion-label>{{ category.name }}</ion-label>
           <ion-label>{{ category.limitamount }}SUM API?</ion-label>
-          <ion-label v-if="category.name=='Essen'"><ion-icon :icon="fastFoodOutline"></ion-icon></ion-label>
-          <ion-label v-if="category.name=='Freizeit'"><ion-icon :icon="airplaneOutline"></ion-icon></ion-label>
-          <ion-label v-if="category.name=='Wohnen'"><ion-icon :icon="homeOutline"></ion-icon></ion-label>
-          <ion-label v-if="category.name=='Sonstiges'"><ion-icon :icon="starOutline"></ion-icon></ion-label>
-          <ion-label ><ion-icon :icon="createOutline"  @click="openUpdateAlert"></ion-icon></ion-label>
-          <ion-label><ion-icon :icon="trashBinOutline" slot="end" @click="triggerdeleteFunction(category.id as number )"></ion-icon></ion-label>
-        
+          <ion-label v-if="category.name == 'Essen'"><ion-icon :icon="fastFoodOutline"></ion-icon></ion-label>
+          <ion-label v-if="category.name == 'Freizeit'"><ion-icon :icon="airplaneOutline"></ion-icon></ion-label>
+          <ion-label v-if="category.name == 'Wohnen'"><ion-icon :icon="homeOutline"></ion-icon></ion-label>
+          <ion-label v-if="category.name == 'Sonstiges'"><ion-icon :icon="starOutline"></ion-icon></ion-label>
+          <ion-label><ion-icon :icon="createOutline" @click="openUpdateAlert"></ion-icon></ion-label>
+          <ion-label><ion-icon :icon="trashBinOutline" slot="end"
+              @click="triggerdeleteFunction(category.id as number)"></ion-icon></ion-label>
+
         </ion-item>
-      
+
       </ion-list>
 
       <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-        <ion-fab-button id="addcategory-alert" >
+        <ion-fab-button id="addcategory-alert">
           <ion-icon :icon="add"></ion-icon>
         </ion-fab-button>
       </ion-fab>
 
-      <ion-alert 
-        trigger="addcategory-alert" header="Add a new Category!"
+      <ion-alert trigger="addcategory-alert" header="Add a new Category!" 
         :buttons="alertaddCategoryButtons"
         :inputs="alertaddCategoryInputs">
       </ion-alert>
 
-      <ion-alert :isOpen="showUpdateAlert " @didDismiss="setOpen(false)"
-        header="Update a Category!"
-        :buttons="alertupdateCategoryButtons"
-        :inputs="alertupdateCategoryInputs">
+      <ion-alert :isOpen="showUpdateAlert" @didDismiss="setOpen(false)" header="Update a Category!"
+        :buttons="alertupdateCategoryButtons" :inputs="alertupdateCategoryInputs">
       </ion-alert>
 
     </ion-content>
@@ -171,14 +174,15 @@ ion-alert .input-wrapper {
 
 ion-list {
   --ion-item-background: #006e0000;
-  
+
 }
 
 ion-item {
   --ion-item-background: #b3b3b3a4;
   -moz-box-align: stretch;
 }
-#seperator{
+
+#seperator {
   --ion-item-justify-content: space-between;
 }
 </style>

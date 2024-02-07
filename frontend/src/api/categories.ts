@@ -29,13 +29,16 @@ export  async function getAllCategories() {
     }
 }
 
-  export async function addCategory(category:Category) {
+  export async function addCategory(c:Category) {
         const config = {        
             withCredentials: true,
         }
         try {
-            const response = await axios.post(API_ROOT+"/api/categories", category, config);
+            const response = await axios.post(API_ROOT+"/api/categories", c, config);
+            console.log(c.limitamount);
+            console.log(c.name);
             console.log(response);
+            
             return response;
         } catch (error) {
             return <any>error;   

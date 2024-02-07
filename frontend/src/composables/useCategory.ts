@@ -24,11 +24,11 @@ export function useCategory(){
         }
     }
     
-    const addNewCategory = async (newCategory: Category) => {
+    const addNewCategory = async (c: Category) => {
         try {
-            const response = await addCategory(newCategory);
-            getCategories();
-            console.log(response);
+            
+            addCategory(c);
+            console.log("Category added");
         } catch (error) {
             console.log(error); // FIXME: Errorhandling
         }
