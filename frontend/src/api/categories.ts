@@ -53,3 +53,15 @@ export async function deleteaCategory(id:number) {
         return <any>error;   
     }
 } 
+export async function updateaCategory(id:number,c:Category) {
+    const config = {        
+        withCredentials: true,
+    }
+    try {
+        const response = await axios.post(API_ROOT+"/api/categories/"+id,c, config);
+        console.log(response);
+        return response;
+    } catch (error) {
+        return <any>error;   
+    }
+} 

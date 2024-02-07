@@ -53,6 +53,7 @@ const alertInputs = [
   },
   {
     type: 'number',
+    name: 'Amount',
     placeholder: 'Amount',
     value: ExpenseToAdd.value.amount,
   },

@@ -1,8 +1,8 @@
 import { Expense } from "./expense";
 
 export interface Category {
-    id: number;
+    id?: number;
     name: string;
     limitamount: number;
-    expenses: Expense[];
+    expenses?: Expense[];
 }

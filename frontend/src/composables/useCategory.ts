@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import { Expense } from '@/model/expense';
-import { getAllCategories, getCategory, addCategory, deleteaCategory} from '@/api/categories';
+import { getAllCategories, getCategory, addCategory, deleteaCategory, updateaCategory} from '@/api/categories';
 import { Category } from '@/model/category';
 
 export function useCategory(){
@@ -43,6 +43,15 @@ export function useCategory(){
             console.log(error); // FIXME: Errorhandling
         }
     }
+    const updateCategory = async (c:Category,id: number) => {
+        try {
+            //const response = await deleteCategory(id);
+            updateaCategory(id,c);
+            console.log("Category updated");
+        } catch (error) {
+            console.log(error); // FIXME: Errorhandling
+        }
+    }
 
-    return { categories, category, getCategories, getOneCategory, addNewCategory,deleteCategory };
+    return { categories, category, getCategories, getOneCategory, addNewCategory,deleteCategory ,updateCategory};
 }
