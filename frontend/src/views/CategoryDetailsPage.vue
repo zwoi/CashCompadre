@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import listitem from "../components/ListItem.vue"
 import { useRoute } from 'vue-router';
-import { IonPage, IonHeader,IonItem,IonLabel, IonTitle, IonContent, IonToolbar, IonFab, IonFabButton, IonList, IonBackButton, IonButtons } from '@ionic/vue';
+import { IonPage,IonButton, IonHeader,IonItem,IonLabel, IonTitle, IonContent, IonToolbar, IonFab, IonFabButton, IonList, IonBackButton, IonButtons } from '@ionic/vue';
 import { useExpenses } from "@/composables/useExpenses";
 import { useCategory } from "@/composables/useCategory";
 import { onMounted } from "vue";
@@ -22,13 +22,14 @@ onMounted(() => {
 
             <ion-header>
                 <ion-toolbar>
-                    <ion-buttons slot="start">
+                    <ion-button slot="start">
                         <ion-back-button> </ion-back-button>
-                    </ion-buttons>
+                    </ion-button>
+                    <ion-button v-on:click="getOneCategory(categorytitle)"></ion-button>
                     <ion-title>{{ categorytitle }}</ion-title>
                 </ion-toolbar>
                 <ion-list v-if="category">
-                    <ion-item v-for="expense in category.expenses" :key="category.id" ion-item>
+                    <ion-item v-for="expense in category.expenses" :key="expense.id">
                         <ion-label>{{ expense.note }}</ion-label>
                     </ion-item>
                 </ion-list>
