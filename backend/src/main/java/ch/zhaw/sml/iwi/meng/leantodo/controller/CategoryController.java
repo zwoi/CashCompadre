@@ -29,8 +29,13 @@ public class CategoryController {
         return userRepository.findById(loginName).get().getCategories();
     }
 
+    public void createCategory(Category category, String loginName) {
+        User user = userRepository.findById(loginName).get();
+        categoryRepository.save(category);
+    }
+
     public void addExpense(String loginName, Long categoryId, Expense expense) {
-        LOGGER.log(Level.INFO, "User " + loginName + " is adding expesnes to category " + categoryId + ": " + expense);
+        LOGGER.log(Level.INFO, "User " + loginName + " is adding expenses to category " + categoryId + ": " + expense);
         User user = userRepository.findById(loginName).get();
         // Check if category is owned by user
         Category category = null;
