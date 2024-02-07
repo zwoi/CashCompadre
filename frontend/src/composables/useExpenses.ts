@@ -14,7 +14,8 @@ export function useExpenses() {
             console.log(error); // FIXME: Errorhandling
         } */
     }
-    const addExpense = async (e:Expense, id:number) => {
+    //error handling machen
+    const addExpense = async (e:Expense , id:number) => {
          try {
              expenses.value = await addanExpense(e,id);
          } catch (error) {
