@@ -13,10 +13,10 @@ import {
   IonButton,
   IonInput,
 } from "@ionic/vue";
-import { useTodos } from "../composables/useTodos";
+
 import { ref } from "vue";
 const text = ref('!');
-const { newTodo, todos, getTodos, addTodo, finishTodo, archiveTodo } = useTodos();
+
 
 </script>
 
