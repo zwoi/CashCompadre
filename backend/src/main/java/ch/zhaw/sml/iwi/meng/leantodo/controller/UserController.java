@@ -8,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import ch.zhaw.sml.iwi.meng.leantodo.entity.Category;
-import ch.zhaw.sml.iwi.meng.leantodo.entity.Expense;
 import ch.zhaw.sml.iwi.meng.leantodo.entity.Role;
 import ch.zhaw.sml.iwi.meng.leantodo.entity.RoleRepository;
 import ch.zhaw.sml.iwi.meng.leantodo.entity.User;
@@ -57,4 +56,11 @@ private static final Logger LOGGER = Logger.getLogger(ClassName.class.getName())
         // Save the category with the updated expense
         userRepository.save(user);
     }
+
+    public Integer getBalance(String loginName) {
+        return userRepository.findById(loginName).get().getBalance();
+    }
+
+  
+
 }

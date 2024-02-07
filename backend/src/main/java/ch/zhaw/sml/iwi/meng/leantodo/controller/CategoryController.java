@@ -36,15 +36,29 @@ public class CategoryController {
             Optional<Category> categoryOptional = user.getCategories().stream()
                     .filter(category -> category.getName().equals(categoryName))
                     .findFirst();
-    
+
             return categoryOptional.orElse(null);
         }
         return null;
-    }    
+    }
 
     public void createCategory(Category category, String loginName) {
         User user = userRepository.findById(loginName).get();
         categoryRepository.save(category);
+    }
+
+    public void updateCategory(Long categoryId, Category updatedCategory, String loginName) {
+        User user = userRepository.findById(loginName).get();
+        // Check if category is owned by user
+        Category existingCategory = null;
+        for (Category c : user.getCategories()) {
+            if (c.getId() == categoryId) {
+                existingCategory = c;
+            }
+        }
+        existingCategory.setName(updatedCategory.getName());
+        existingCategory.setLimitAmount(updatedCategory.getLimitAmount());
+        categoryRepository.save(existingCategory);
     }
 
     public void addExpense(String loginName, Long categoryId, Expense expense) {

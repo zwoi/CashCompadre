@@ -7,16 +7,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import ch.zhaw.sml.iwi.meng.leantodo.controller.CategoryController;
 import ch.zhaw.sml.iwi.meng.leantodo.controller.UserController;
 import ch.zhaw.sml.iwi.meng.leantodo.dto.NewUserDTO;
-import ch.zhaw.sml.iwi.meng.leantodo.entity.Expense;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @CrossOrigin
@@ -24,6 +26,9 @@ public class UserEndpoint {
 
     @Autowired
     private UserController userController;
+
+    @Autowired
+    private CategoryController categoryController;
 
     @RequestMapping(path = "/api/me", method = RequestMethod.GET, produces = "application/json")
     @PreAuthorize("hasRole('USER')")
@@ -52,5 +57,21 @@ public class UserEndpoint {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
+
+    @GetMapping("/api/balance")
+    public ResponseEntity<Integer> getBalance(Principal principal){
+        try {
+            return new ResponseEntity<>(userController.getBalance(principal.getName()), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    /* 
+    @GetMapping("/api/restGeld")
+    public ResponseEntity<Integer> getRestGeld(Principal principal) {
+     
+    }
+    */
 
 }

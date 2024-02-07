@@ -12,7 +12,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,5 +38,7 @@ public class User {
     private List<Category> categories = new ArrayList<>();
 
     private Integer balance = 0;
+
+    private Integer restGeld = 0;
 
 }
