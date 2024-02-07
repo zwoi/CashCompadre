@@ -35,13 +35,14 @@ public class CategoryEndpoint {
     }
 
     @PostMapping("/api/categories")
-    public ResponseEntity<String> createCategory(@RequestBody Category category, Principal principal) {
+    public ResponseEntity<Category> createCategory(
+            Principal principal,
+            @RequestBody Category category) {
         try {
-            String username = principal.getName();
-            categoryController.createCategory(category, username);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            Category createdCategory = categoryController.createCategory(principal.getName(), category);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdCategory);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 

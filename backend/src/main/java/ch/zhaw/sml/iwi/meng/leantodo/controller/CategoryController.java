@@ -1,5 +1,6 @@
 package ch.zhaw.sml.iwi.meng.leantodo.controller;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -42,9 +43,10 @@ public class CategoryController {
         return null;
     }
 
-    public void createCategory(Category category, String loginName) {
+    public Category createCategory(String loginName, Category category) {
         User user = userRepository.findById(loginName).get();
-        categoryRepository.save(category);
+        user.getCategories().add(category);
+        return categoryRepository.save(category);
     }
 
     public void updateCategory(Long categoryId, Category updatedCategory, String loginName) {
