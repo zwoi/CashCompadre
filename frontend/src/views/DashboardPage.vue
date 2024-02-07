@@ -16,11 +16,10 @@ import {
   IonFabButton,
   IonIcon,
 } from "@ionic/vue";
-import { useTodos } from "../composables/useTodos";
+
 import { ref } from "vue";
 import { add } from 'ionicons/icons';
 const text = ref('!');
-const { newTodo, todos, getTodos, addTodo, finishTodo, archiveTodo } = useTodos();
 const alertButtons = ['OK','Ich bin ein HS'];
 const alertInputs = [
   {

@@ -20,7 +20,7 @@ import {
   IonBackButton
 
 } from "@ionic/vue";
-import { useTodos } from "../composables/useTodos";
+
 import { ref } from "vue";
 import { add } from 'ionicons/icons';
 import { useCategory } from '../composables/useCategory';

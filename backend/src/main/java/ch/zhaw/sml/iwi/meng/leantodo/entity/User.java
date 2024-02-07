@@ -39,4 +39,6 @@ public class User {
 
     private Integer balance = 0;
 
+    private Integer restGeld = 0;
+
 }
