@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import { Expense } from '@/model/expense';
-import { getAllCategories, getCategory } from '@/api/categories';
+import { getAllCategories, getCategory, addCategory} from '@/api/categories';
 import { Category } from '@/model/category';
 
 export function useCategory(){
@@ -24,7 +24,15 @@ export function useCategory(){
         }
     }
     
+    const addNewCategory = async (newCategory: Category) => {
+        try {
+            const response = await addCategory(newCategory);
+            getCategories();
+            console.log(response);
+        } catch (error) {
+            console.log(error); // FIXME: Errorhandling
+        }
+    }
 
-    return { categories,category, getCategories, getOneCategory };
-
+    return { categories, category, getCategories, getOneCategory, addNewCategory };
 }

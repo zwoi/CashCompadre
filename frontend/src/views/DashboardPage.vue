@@ -21,29 +21,42 @@ import {
 import { ref } from "vue";
 import { add } from 'ionicons/icons';
 import { useExpenses } from "@/composables/useExpenses";
+import { Expense } from "@/model/expense";
 const {expenses, addExpense} = useExpenses();
 const text = ref('!');
-const alertButtons = ['OK'];
+const ExpenseToAdd=ref<Expense>();
+ExpenseToAdd.value = {
+  
+  category: 1,
+  note: 'hello',
+  amount: 1,
+};
+
+const alertButtons = [
+        {
+          text: 'Action',
+          handler: () => addExpense(ExpenseToAdd.value as Expense,1),
+            }
+        
+      ];
+
 const alertInputs = [
   {
-    placeholder: 'Name',
-  },
-  {
     placeholder: 'Category Name',
-    attributes: {
-      maxlength: 8,
-    },
+    name: 'Category Name',
+    value: ExpenseToAdd.value.category,
+  },
+  {
+    placeholder: 'Expense Name',
+    name: 'Expense Name',
+    value: ExpenseToAdd.value.note,
   },
   {
     type: 'number',
-    placeholder: 'Limit',
-    min: 1,
-    max: 100,
+    placeholder: 'Amount',
+    value: ExpenseToAdd.value.amount,
   },
-  {
-    type: 'number',
-    placeholder: 'percentage',
-  },
+  
 ];
 </script>
 
@@ -56,7 +69,7 @@ const alertInputs = [
         </ion-toolbar>
     </ion-header>
     <ion-fab slot="fixed" vertical="bottom" horizontal="end"> 
-    <ion-fab-button color:primary id="present-alert">
+    <ion-fab-button id="present-alert">
           <ion-icon :icon="add"></ion-icon>
         </ion-fab-button>
       </ion-fab>

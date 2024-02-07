@@ -1,6 +1,5 @@
 package ch.zhaw.sml.iwi.meng.leantodo.controller;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
