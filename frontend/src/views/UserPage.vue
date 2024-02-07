@@ -14,8 +14,18 @@ import {
   IonInput,
 } from "@ionic/vue";
 
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { getUser } from "@/api/users";
+import { useUser } from '../composables/useUser'
+
+const { user, getUserValues } = useUser();
+
+
 const text = ref('!');
+
+onMounted(() => {
+  getUserValues();
+  });
 
 
 </script>
@@ -28,7 +38,11 @@ const text = ref('!');
           <ion-title>Profile</ion-title>
         </ion-toolbar>
       </ion-header>
-      <p>Was  geht </p>
+      <div v-if="user">
+
+      </div>
+      <p v-if="user">Was geht {{ user.loginName }}</p>
+      <p v-else>No user data available</p>
     </ion-content>
   </ion-page>
 </template>

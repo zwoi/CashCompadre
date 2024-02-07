@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ch.zhaw.sml.iwi.meng.leantodo.controller.CategoryController;
 import ch.zhaw.sml.iwi.meng.leantodo.controller.UserController;
 import ch.zhaw.sml.iwi.meng.leantodo.dto.NewUserDTO;
+import ch.zhaw.sml.iwi.meng.leantodo.entity.User;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -66,6 +68,16 @@ public class UserEndpoint {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
+
+    @GetMapping("/api/user")
+    public ResponseEntity<User> getUser(Principal principal) {
+        try {
+            return new ResponseEntity<>(userController.getUserByName(principal.getName()), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+    
 
     /* 
     @GetMapping("/api/restGeld")
