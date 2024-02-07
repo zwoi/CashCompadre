@@ -98,9 +98,7 @@ const alertInputs = [
   ion-alert .input-wrapper {
     --color:white;
   }
-  .alert-input {
-    color:white !important;
-  }
+ 
   
 </style>
   
