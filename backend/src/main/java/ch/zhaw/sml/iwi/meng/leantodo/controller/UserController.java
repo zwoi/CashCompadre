@@ -8,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import ch.zhaw.sml.iwi.meng.leantodo.entity.Category;
-import ch.zhaw.sml.iwi.meng.leantodo.entity.Expense;
 import ch.zhaw.sml.iwi.meng.leantodo.entity.Role;
 import ch.zhaw.sml.iwi.meng.leantodo.entity.RoleRepository;
 import ch.zhaw.sml.iwi.meng.leantodo.entity.User;

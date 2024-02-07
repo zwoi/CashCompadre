@@ -6,13 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import ch.zhaw.sml.iwi.meng.leantodo.controller.UserController;
-import ch.zhaw.sml.iwi.meng.leantodo.entity.Role;
-import ch.zhaw.sml.iwi.meng.leantodo.entity.RoleRepository;
-import ch.zhaw.sml.iwi.meng.leantodo.entity.User;
-import ch.zhaw.sml.iwi.meng.leantodo.entity.UserRepository;
 
 @SpringBootApplication
 @EnableWebSecurity
@@ -24,11 +19,6 @@ public class LeanToDo implements CommandLineRunner {
         
     }
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private RoleRepository roleRepository;
 
     @Autowired
     private UserController userController;
