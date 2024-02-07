@@ -56,4 +56,11 @@ private static final Logger LOGGER = Logger.getLogger(ClassName.class.getName())
         // Save the category with the updated expense
         userRepository.save(user);
     }
+
+    public Integer getBalance(String loginName) {
+        return userRepository.findById(loginName).get().getBalance();
+    }
+
+  
+
 }
