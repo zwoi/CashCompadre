@@ -45,6 +45,18 @@ public class CategoryEndpoint {
         }
     }
 
+    @PutMapping("/api/categories/{categoryId}")
+    public ResponseEntity<String> updateCategory(@PathVariable Long categoryId, @RequestBody Category updatedCategory,
+            Principal principal) {
+        try {
+            String username = principal.getName();
+            categoryController.updateCategory(categoryId, updatedCategory, username);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/api/categories/{id}")
     public ResponseEntity<Void> addExpense(
             Principal principal,
