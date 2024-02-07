@@ -41,7 +41,7 @@ onMounted(() => {
       <ion-list>
         <ion-item v-for="category in categories" :key="category.id" :router-link="'/tabs/categories/' + category.name">
           <ion-label>{{ category.name }}</ion-label>
-          <ion-lbael>{{ category.limitamount }}</ion-lbael>
+          <ion-label>{{ category.limitamount }}</ion-label>
         </ion-item>
       </ion-list>
 
