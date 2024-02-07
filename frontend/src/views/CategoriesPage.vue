@@ -1,57 +1,32 @@
 <script setup lang="ts">
-import {
-  IonPage,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent,
-  IonCol,
-  IonRow,
-  IonGrid,
-  IonItem,
-  IonList,
-  IonButton,
-  IonInput,
-  IonIcon,
-  IonFab,
-  IonFabButton,
-  IonLabel,
-  IonAlert,
-  IonBackButton
-
-} from "@ionic/vue";
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonCol, IonRow, IonGrid, IonItem, IonList, IonButton, IonInput, IonIcon, IonFab, IonFabButton, IonLabel, IonAlert, IonBackButton } from "@ionic/vue";
 
 import { ref } from "vue";
 import { add } from 'ionicons/icons';
 import { useCategory } from '../composables/useCategory';
 import { onMounted } from 'vue';
+
 const text = ref('hello');
-const { categories, getCategories } = useCategory();
+const { categories, getCategories, addNewCategory } = useCategory();
+
 const alertButtons = ['OK'];
 const alertInputs = [
   {
-    placeholder: 'Name',
-  },
-  {
     placeholder: 'Category Name',
     attributes: {
-      maxlength: 8,
+      maxlength: 15,
     },
   },
   {
     type: 'number',
     placeholder: 'Limit',
-    min: 1,
-    max: 100,
-  },
-  {
-    type: 'number',
-    placeholder: 'percentage',
   },
 ];
+
 onMounted(() => {
   getCategories();
 });
+
 </script>
 
 <template>
@@ -60,28 +35,35 @@ onMounted(() => {
       <ion-header>
         <ion-toolbar>
           <ion-title>Categories</ion-title>
-
         </ion-toolbar>
       </ion-header>
-      <ion-button v-on:click="getCategories"></ion-button>
+
       <ion-list>
-
-
         <ion-item v-for="category in categories" :key="category.id" :router-link="'/tabs/categories/' + category.name">
           <ion-label>{{ category.name }}</ion-label>
+          <ion-lbael>{{ category.limitamount }}</ion-lbael>
         </ion-item>
       </ion-list>
+
       <ion-fab slot="fixed" vertical="bottom" horizontal="end">
 
         <ion-fab-button color:primary id="present-alert">
           <ion-icon :icon="add"></ion-icon>
         </ion-fab-button>
+
       </ion-fab>
-      <ion-alert trigger="present-alert" header="Please enter your info" :buttons="alertButtons"
-        :inputs="alertInputs"></ion-alert>
+
+      <ion-alert 
+        trigger="present-alert" header="Please enter your info"
+        :buttons="alertButtons"
+        :inputs="alertInputs">
+      </ion-alert>
+
     </ion-content>
   </ion-page>
 </template>
+
+
 <style scoped>
 ion-alert {
   --color: white;
@@ -95,4 +77,3 @@ ion-alert .input-wrapper {
   --color: white;
 }
 </style>
-  
