@@ -2,6 +2,7 @@ package ch.zhaw.sml.iwi.meng.leantodo.controller;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,6 +29,18 @@ public class CategoryController {
     public List<Category> listAllCategories(String loginName) {
         return userRepository.findById(loginName).get().getCategories();
     }
+
+    public Category getCategoryByNameAndUser(String categoryName, String loginName) {
+        User user = userRepository.findById(loginName).orElse(null);
+        if (user != null) {
+            Optional<Category> categoryOptional = user.getCategories().stream()
+                    .filter(category -> category.getName().equals(categoryName))
+                    .findFirst();
+    
+            return categoryOptional.orElse(null);
+        }
+        return null;
+    }    
 
     public void createCategory(Category category, String loginName) {
         User user = userRepository.findById(loginName).get();
