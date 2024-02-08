@@ -4,7 +4,7 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonContent,
+  IonContent, 
   IonCol,
   IonRow,
   IonGrid,
