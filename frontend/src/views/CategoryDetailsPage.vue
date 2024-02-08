@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
-import listitem from "../components/ListItem.vue"
+
 import { useRoute } from 'vue-router';
-import { IonPage, IonButton, IonHeader, IonItem, IonLabel, IonTitle, IonContent, IonToolbar, IonFab, IonFabButton, IonList, IonBackButton, IonButtons, IonAlert, } from '@ionic/vue';
+import { IonPage, IonButton, IonHeader, IonItem, IonLabel, IonTitle, IonContent, IonToolbar, IonFab, IonFabButton, IonList, IonBackButton, IonButtons, IonAlert,IonIcon } from '@ionic/vue';
 import { useExpenses } from "@/composables/useExpenses";
 import { useCategory } from "@/composables/useCategory";
 import { onMounted, ref, watchEffect } from "vue";
@@ -67,13 +67,13 @@ function triggerDeleteFunction(cateforyId: number, expenseId: number): void {
 
 onMounted(() => {
     getOneCategory(categorytitle);
-
+    sumExpenses();
 });
 
 let totalAmount = 0;
 
 watchEffect(() => {
-    // Grundsätzlich um die totale Summe zu berechnen
+    // Grundsätzlich um die totale Summe zu berechnen warum watchEffect??
     if (category && category.value && category.value.expenses) {
         totalAmount = category.value.expenses.reduce((total, expense) => {
             if (expense.amount !== undefined) {
@@ -83,6 +83,18 @@ watchEffect(() => {
         }, 0);
     }
 });
+//Summe alles expenses hier in category
+function  sumExpenses(){
+    let sum =0;
+    if(category.value){
+    for(let i=0;i<(category.value.expenses).length;i++){
+        sum += category.value.expenses[i].amount as number;
+    
+    }
+    
+    }
+    return sum;
+}
 
 </script>
 
@@ -107,7 +119,8 @@ watchEffect(() => {
                             @click="triggerDeleteFunction(category.id as number, expense.id as number)"></ion-icon></ion-label>
                 </ion-item>
                 <!-- Anzeigen des Gesamtbetrags als zusätzlicher Eintrag -->
-                <ion-item>
+                <!-- wenn leer kein EIntrag -->
+                <ion-item v-if="category.expenses.length>0">
                     <ion-label>Total</ion-label>
                     <ion-label>{{ totalAmount }}</ion-label>
                 </ion-item>

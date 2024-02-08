@@ -21,18 +21,16 @@ import {
 } from "@ionic/vue";
 
 import { createOutline } from "ionicons/icons";
-
 import { ref } from "vue";
 import { add } from 'ionicons/icons';
 import { useExpenses } from "@/composables/useExpenses";
 import { Expense } from "@/model/expense";
 import { User } from "@/model/user";
-const { expenses, addExpense } = useExpenses();
 import { onMounted, } from "vue";
-import { useUser } from '../composables/useUser'
-import { useCategory } from '../composables/useCategory';
-const { user, getUserValues, setBalance, getUserBalance } = useUser();
-const { categories, getCategories, addNewCategory, deleteCategory, updateCategory } = useCategory();
+import { useUser } from '../composables/useUser';
+import {useCategory} from "@/composables/useCategory";
+const { thisuser, getUserValues, setBalance } = useUser();
+const{categories, getCategories} = useCategory();
 const text = ref('!');
 const ExpenseToAdd = ref<Expense>();
 ExpenseToAdd.value = {
@@ -43,38 +41,9 @@ ExpenseToAdd.value = {
 };
 
 
-const alertButtons = [
-  {
-    text: 'Action',
-    handler: () => addExpense(ExpenseToAdd.value as Expense, 1),
-  }
-
-];
-
-const alertInputs = [
-  {
-    placeholder: 'Category Name',
-    name: 'Category Name',
-    value: ExpenseToAdd.value.category,
-  },
-  {
-    placeholder: 'Expense Name',
-    name: 'Expense Name',
-    value: ExpenseToAdd.value.note,
-  },
-  {
-    type: 'number',
-    name: 'Amount',
-    placeholder: 'Amount',
-    value: ExpenseToAdd.value.amount,
-  },
-
-];
-
-
 function calculateRestGeld() {
-  if (user.value) { // Ensure user.value is not undefined
-    let restGeld = user.value.balance;
+  if (thisuser.value) { // Ensure user.value is not undefined
+    let restGeld = thisuser.value.balance;
     for (let i = 0; i < categories.value.length; i++) {
       restGeld -= categories.value[i].limitamount;
     }
@@ -82,7 +51,7 @@ function calculateRestGeld() {
     return restGeld;
   } else {
     console.log('User is not defined');
-    console.log(user.value);
+    console.log(thisuser.value);
     console.log(categories.value);
     return 0; // or any default value when user is not defined
   }
@@ -90,36 +59,42 @@ function calculateRestGeld() {
 
 
 const UserToUpdate = ref<User>();
-let showUpdateAlert = ref(false);
+  UserToUpdate.value = {
+
+
+balance: 0,
+
+};
+let showsetBalanceAlert = ref(false);
 
 function setOpen(value: boolean) {
-  showUpdateAlert.value = value;
+  showsetBalanceAlert.value = value;
 }
 
-function openUpdateAlert() {
+function opensetBalanceAlert() {
   event?.preventDefault();
   setOpen(true);
 }
 
-const alertupdateCategoryInputs = [
+const alertsetBalanceCategoryInputs = [
   {
     type: 'number',
     name: 'Balance',
     placeholder: 'Balance',
-    value: user.value?.balance,
+    balance: UserToUpdate.value.balance,
   },
 ];
 
-const alertupdateCategoryButtons = [{
+const alertsetBalanceCategoryButtons = [{
   text: 'Action',
-  handler: (data) => {
-    setBalance(data.Balance as number);
+  handler: () => {
+    setBalance(UserToUpdate.value.balance);
     setOpen(false);
   },
 }];
 
 onMounted(async () => {
-  await getUserValues();
+  getUserValues();
   getCategories();
 });
 
@@ -136,12 +111,13 @@ onMounted(async () => {
           <ion-title>Dashboard</ion-title>
         </ion-toolbar>
       </ion-header>
-      <ion-list v-if="user">
+      <ion-button @click="setBalance(12)"></ion-button>
+        <ion-list v-if="thisuser">
         <ion-item>
           <ion-label>Geplante monatliche Ausgaben:</ion-label>
-          <ion-text>{{ user.balance }}</ion-text>
-          <h1>{{ user.balance }}</h1>
-          <ion-label><ion-icon :icon="createOutline" @click="openUpdateAlert"></ion-icon></ion-label>
+          <ion-text>{{ thisuser.balance }}</ion-text>
+          <h1>{{ thisuser.balance }}</h1>
+          <ion-label><ion-icon :icon="createOutline" @click="opensetBalanceAlert"></ion-icon></ion-label>
         </ion-item>
         <!-- Weitere Zeilen für zusätzliche Benutzerinformationen -->
       </ion-list>
@@ -151,8 +127,8 @@ onMounted(async () => {
         </ion-item>
       </ion-list>
 
-      <ion-alert :isOpen="showUpdateAlert" @didDismiss="setOpen(false)" header="Update a Category!"
-        :buttons="alertupdateCategoryButtons" :inputs="alertupdateCategoryInputs">
+      <ion-alert :isOpen="showsetBalanceAlert" @didDismiss="setOpen(false)" header="Update ur Balance!"
+        :buttons="alertsetBalanceCategoryButtons" :inputs="alertsetBalanceCategoryInputs">
       </ion-alert>
 
 

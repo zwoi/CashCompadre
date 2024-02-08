@@ -99,7 +99,7 @@ const alertaddCategoryButtons = [{
     CategoryToAdd.value.name = data['Category Name'];
     CategoryToAdd.value.limitamount = data.Limit;
     addNewCategory(CategoryToAdd.value as Category);
-    
+    reloadlist.value = !reloadlist.value;
   },
 }];
 watch(() => CategoryToAdd.value, () => {
@@ -157,8 +157,8 @@ async function deleteCategoryFunction(id: number): Promise<void> {
 
       <ion-list lines="inset" :inset="true">
 
-        <ion-item class="ion-justify-content-between" v-for="category in categories" :key="category.id">
-          
+        <ion-item class="ion-justify-content-between" v-for="category in categories" :key="category.id"
+          :router-link="'/tabs/categories/' + category.name">
 
           <ion-label>{{ category.name }}</ion-label>
           <!--<ion-label>{{ category.limitamount }}SUM API?</ion-label>-->

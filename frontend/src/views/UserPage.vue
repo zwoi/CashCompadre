@@ -12,20 +12,41 @@ import {
   IonList,
   IonButton,
   IonInput,
+  IonLabel,
+  IonText
 } from "@ionic/vue";
 
 import { onMounted, ref } from "vue";
-import { getBalance } from "@/api/users";
+import { getUser } from "@/api/users";
 import { useUser } from '../composables/useUser'
-
-const { user, getUserValues, setBalance } = useUser();
+import { User } from "@/model/user";
+import { useCategory } from "@/composables/useCategory";
+const { getCategories } = useCategory();
+const { thisuser, getUserValues, setBalance } = useUser();
 
 const text = ref('!');
 
 onMounted(() => {
   getUserValues();
+  getCategories();
+  sumlimitallCategories();
 });
-
+const Limitall = sumlimitallCategories();
+function sumlimitallCategories(){
+  let sum=0;
+  
+  if(thisuser && thisuser.value!==undefined){ 
+    
+  for(let i=0;  i<thisuser.value.categories.length; i++){
+    console.log("ok");
+    
+      sum += thisuser.value.categories[i].limitamount;
+    
+  }
+}
+console.log(sum);
+return sum;
+}
 const handleClick = () => {
   // setBalance(newBalance);
   // INSERT ALERT WITH FORM TO CHANGE BALANCE
@@ -43,12 +64,12 @@ const handleClick = () => {
           <ion-title>Profile</ion-title>
         </ion-toolbar>
       </ion-header>
-      <ion-grid v-if="user">
+      <ion-grid v-if="thisuser">
         <ion-row>
           <ion-col>
             <ion-item>
               <ion-label>Benutzer:</ion-label>
-              <ion-text>{{ user.loginName }}</ion-text>
+              <ion-text>{{ thisuser.loginName }}</ion-text>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -56,7 +77,7 @@ const handleClick = () => {
           <ion-col>
             <ion-item @click="handleClick">
               <ion-label>Geplante monatliche Ausgaben:</ion-label>
-              <ion-text>{{ user.balance }}</ion-text>
+              <ion-text>{{ Limitall }}</ion-text>
             </ion-item>
           </ion-col>
         </ion-row>

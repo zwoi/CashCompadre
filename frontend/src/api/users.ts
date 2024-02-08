@@ -18,18 +18,7 @@ export  async function getUser() {
     }
   }
 
-  export  async function getBalance() {
-    const config = {        
-        withCredentials: true
-    }
-    try {
-        const response = await axios.get(API_ROOT+"/api/balance", config);
-        console.log(response);
-        return response.data;
-    } catch (error) {
-        return <any>error;   
-    }
-  }
+ 
 
   export async function changeBalance(changedBalance: number) {
     console.log(changedBalance);
