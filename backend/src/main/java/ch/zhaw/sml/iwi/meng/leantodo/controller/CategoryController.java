@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.javapoet.ClassName;
 import org.springframework.stereotype.Component;
 
@@ -46,6 +47,15 @@ public class CategoryController {
         User user = userRepository.findById(loginName).get();
         user.getCategories().add(category);
         return categoryRepository.save(category);
+    }
+
+    public void deleteCategory(Long categoryId, String loginName) {
+        User user = userRepository.findById(loginName).orElse(null);
+        if (user != null) {
+            List<Category> categories = user.getCategories();
+            categories.removeIf(category -> category.getId().equals(categoryId));
+            userRepository.save(user);
+        }
     }
 
     public void updateCategory(Long categoryId, Category updatedCategory, String loginName) {

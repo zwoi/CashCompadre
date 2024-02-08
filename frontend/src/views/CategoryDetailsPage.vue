@@ -30,7 +30,7 @@ onMounted(() => {
 let totalAmount = 0;
 
 watchEffect(() => {
-    // Entpacke die Ref-Wrap und überprüfe, ob category und category.value.expenses vorhanden sind
+    // Grundsätzlich um die totale Summe zu berechnen
     if (category && category.value && category.value.expenses) {
         totalAmount = category.value.expenses.reduce((total, expense) => {
             if (expense.amount !== undefined) {

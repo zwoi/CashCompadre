@@ -37,11 +37,11 @@ import { onMounted } from 'vue';
 import { Category } from "@/model/category";
 const { categories, getCategories, addNewCategory, deleteCategory, updateCategory } = useCategory();
 
-
 const CategoryToAdd = ref<Category>();
 const CategoryToUpdate = ref<Category>();
+
 CategoryToAdd.value = {
-  name: "test",
+  name: "",
   limitamount: 100,
 };
 CategoryToUpdate.value = {
@@ -49,15 +49,12 @@ CategoryToUpdate.value = {
   limitamount: 0,
 };
 
-
-
-
 const alertaddCategoryInputs = [
   {
-    placeholder: 'Category Name7777',
+    placeholder: 'Category Name',
     type: 'text',
     name: 'Category Name',
-    value: CategoryToAdd.value.name,
+    value: "",
   },
   {
     type: 'number',
@@ -66,6 +63,7 @@ const alertaddCategoryInputs = [
     value: CategoryToAdd.value.limitamount,
   },
 ];
+
 const alertupdateCategoryInputs = [
   {
     placeholder: 'Category Name',
@@ -79,18 +77,26 @@ const alertupdateCategoryInputs = [
     value: CategoryToUpdate.value.limitamount,
   },
 ];
+
 const alertupdateCategoryButtons = [{
   text: 'Action',
   handler: () => updateCategory(CategoryToUpdate.value as Category, 1),
 }];
+
 const alertaddCategoryButtons = [{
   text: 'Action',
-  handler: () => addNewCategory(CategoryToAdd.value as Category) ,
+  handler: (data) => {
+    CategoryToAdd.value.name = data['Category Name'];
+    CategoryToAdd.value.limitamount = data.Limit;
+    addNewCategory(CategoryToAdd.value as Category);
+    getCategories();
+  },
 }];
 
 onMounted(() => {
   getCategories();
 });
+
 let showUpdateAlert = ref(false);
 
 function setOpen(value: boolean) {
@@ -101,14 +107,19 @@ function openUpdateAlert() {
   setOpen(true);
 
 }
-function triggerdeleteFunction(id: number) {
-  event?.preventDefault();
-  deleteCategory(id);
-  //funktioniert nicht
 
+function triggerDeleteFunction(id: number): void {
+  if (confirm('Are you sure you want to delete this category?')) {
+    deleteCategoryFunction(id);
+  }
+}
 
-
-
+async function deleteCategoryFunction(id: number): Promise<void> {
+  try {
+    await deleteCategory(id);
+  } catch (error) {
+    console.error('Error deleting category:', error);
+  }
 }
 </script>
 
@@ -127,14 +138,14 @@ function triggerdeleteFunction(id: number) {
           :router-link="'/tabs/categories/' + category.name">
 
           <ion-label>{{ category.name }}</ion-label>
-          <ion-label>{{ category.limitamount }}SUM API?</ion-label>
+          <!--<ion-label>{{ category.limitamount }}SUM API?</ion-label>-->
           <ion-label v-if="category.name == 'Essen'"><ion-icon :icon="fastFoodOutline"></ion-icon></ion-label>
           <ion-label v-if="category.name == 'Freizeit'"><ion-icon :icon="airplaneOutline"></ion-icon></ion-label>
           <ion-label v-if="category.name == 'Wohnen'"><ion-icon :icon="homeOutline"></ion-icon></ion-label>
           <ion-label v-if="category.name == 'Sonstiges'"><ion-icon :icon="starOutline"></ion-icon></ion-label>
           <ion-label><ion-icon :icon="createOutline" @click="openUpdateAlert"></ion-icon></ion-label>
           <ion-label><ion-icon :icon="trashBinOutline" slot="end"
-              @click="triggerdeleteFunction(category.id as number)"></ion-icon></ion-label>
+              @click="triggerDeleteFunction(category.id as number)"></ion-icon></ion-label>
 
         </ion-item>
 

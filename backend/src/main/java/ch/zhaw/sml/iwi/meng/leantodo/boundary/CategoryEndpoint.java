@@ -24,6 +24,7 @@ public class CategoryEndpoint {
     @Autowired
     private CategoryController categoryController;
 
+    // Kategorie anzeigen, löschen bearbeiten
     @GetMapping("/api/categories")
     public List<Category> getMyCategories(Principal principal) {
         return categoryController.listAllCategories(principal.getName());
@@ -43,6 +44,17 @@ public class CategoryEndpoint {
             return ResponseEntity.status(HttpStatus.CREATED).body(createdCategory);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @DeleteMapping("/api/categories/{categoryId}")
+    public ResponseEntity<String> deleteCategory(@PathVariable Long categoryId, Principal principal) {
+        try {
+            String username = principal.getName();
+            categoryController.deleteCategory(categoryId, username);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
