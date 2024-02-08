@@ -16,6 +16,8 @@ import {
   IonFabButton,
   IonIcon,
   IonAlert,
+  IonLabel,
+  IonText,
 } from "@ionic/vue";
 
 import { createOutline } from "ionicons/icons";
@@ -27,10 +29,9 @@ import { Expense } from "@/model/expense";
 import { User } from "@/model/user";
 const { expenses, addExpense } = useExpenses();
 import { onMounted, } from "vue";
-import { getBalance } from "@/api/users";
 import { useUser } from '../composables/useUser'
 import { useCategory } from '../composables/useCategory';
-const { user, getUserValues, setBalance } = useUser();
+const { user, getUserValues, setBalance, getUserBalance } = useUser();
 const { categories, getCategories, addNewCategory, deleteCategory, updateCategory } = useCategory();
 const text = ref('!');
 const ExpenseToAdd = ref<Expense>();
@@ -139,6 +140,7 @@ onMounted(async () => {
         <ion-item>
           <ion-label>Geplante monatliche Ausgaben:</ion-label>
           <ion-text>{{ user.balance }}</ion-text>
+          <h1>{{ user.balance }}</h1>
           <ion-label><ion-icon :icon="createOutline" @click="openUpdateAlert"></ion-icon></ion-label>
         </ion-item>
         <!-- Weitere Zeilen für zusätzliche Benutzerinformationen -->

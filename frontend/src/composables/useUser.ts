@@ -18,7 +18,15 @@ export function useUser() {
             console.log(error); // FIXME: Errorhandling
         }
     }
-
+    const getUserBalance = async () => {
+        if(user.value){
+        try {
+            user.value.balance = await getBalance();
+        } catch (error) {
+            console.log(error); // FIXME: Errorhandling
+        }
+    }
+    }
     const setBalance = async (changedBalance: number) => {
         if (!user.value) return;
         try {
@@ -29,6 +37,6 @@ export function useUser() {
         }
     }
 
-    return { user, getUserValues, setBalance };
+    return { user, getUserValues, setBalance, getUserBalance };
 
 }
