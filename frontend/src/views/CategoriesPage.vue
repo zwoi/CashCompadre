@@ -42,7 +42,7 @@ const CategoryToUpdate = ref<Category>();
 
 CategoryToAdd.value = {
   name: "",
-  limitamount: 100,
+  limitamount: 0,
 };
 CategoryToUpdate.value = {
   name: "",
@@ -83,6 +83,7 @@ const alertupdateCategoryButtons = [{
   handler: () => updateCategory(CategoryToUpdate.value as Category, 1),
 }];
 
+// Kp wieso es rot azeigt aber es funktioniert
 const alertaddCategoryButtons = [{
   text: 'Action',
   handler: (data) => {
@@ -102,10 +103,10 @@ let showUpdateAlert = ref(false);
 function setOpen(value: boolean) {
   showUpdateAlert.value = value;
 }
+
 function openUpdateAlert() {
   event?.preventDefault();
   setOpen(true);
-
 }
 
 function triggerDeleteFunction(id: number): void {
@@ -117,6 +118,7 @@ function triggerDeleteFunction(id: number): void {
 async function deleteCategoryFunction(id: number): Promise<void> {
   try {
     await deleteCategory(id);
+    getCategories();
   } catch (error) {
     console.error('Error deleting category:', error);
   }
