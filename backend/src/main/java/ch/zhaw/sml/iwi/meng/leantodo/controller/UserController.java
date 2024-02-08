@@ -48,7 +48,7 @@ private static final Logger LOGGER = Logger.getLogger(ClassName.class.getName())
 
     public void updateBalance(String loginName, Integer updatedBalance) {
         LOGGER.log(Level.INFO,
-                "User " + loginName + " is updating their balance to" + updatedBalance);
+                "User " + loginName + " is updating their balance to " + updatedBalance);
         User user = userRepository.findById(loginName).get();
         
         // Update the balance with updatedBalance

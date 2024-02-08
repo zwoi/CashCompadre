@@ -12,7 +12,6 @@ export  async function getUser() {
     }
     try {
         const response = await axios.get(API_ROOT+"/api/user", config);
-        console.log(response);
         return response.data;
     } catch (error) {
         return <any>error;   
@@ -32,16 +31,21 @@ export  async function getUser() {
     }
   }
 
-  export  async function changeBalance(changedBalance: number) {
-    const config = {        
-        withCredentials: true
+  export async function changeBalance(changedBalance: number) {
+    console.log(changedBalance);
+    const config = {
+        withCredentials: true,
     }
+
     try {
-        const response = await axios.put(API_ROOT+"/api/balance", config);
+        const response = await axios.put(API_ROOT + "/api/balance", changedBalance, config);
+        
         console.log(response);
-        return response;
+        return response.data; // Return the response data
     } catch (error) {
-        return <any>error;   
+        console.log("ERROR: "+changedBalance);
+        console.error("Error while changing balance:", error);
+        throw error; // Throw the error so that the caller can handle it
     }
-  }
+}
   
