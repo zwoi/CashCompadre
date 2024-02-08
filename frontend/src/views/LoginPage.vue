@@ -21,7 +21,7 @@
                 </ion-item>
               </div>
               <div>
-                <ion-button size="large" @click="login" expand="block">Login</ion-button>
+                <ion-button size="large" @click="loginnot" expand="block">Login</ion-button>
               </div>
             </ion-col>
           </ion-row>
@@ -43,7 +43,21 @@ import {
   IonItem,
 } from "@ionic/vue";
 import { useLogin } from "../composables/useLogin";
-
+import { body, notifications, options } from "ionicons/icons";
+import { LocalNotifications, ScheduleOptions } from "@capacitor/local-notifications";
+function loginnot(){
+  let options:ScheduleOptions={
+    notifications: [{
+      id:111,
+      title: "Hello",
+      body: "Thanks for logging in",  
+      largeBody: "Add your first Item!",
+  }],
+}
+    LocalNotifications.schedule(options);
+  
+  login();
+}
 const { username, password, login } = useLogin();
 
 </script>
