@@ -22,10 +22,11 @@ import {
   alertController,
 } from "@ionic/vue";
 
-import { ref } from "vue"; 
+import { ref, watch } from "vue"; 
 import {
   add,
   airplaneOutline,
+  cashOutline,
   createOutline,
   fastFoodOutline,
   homeOutline,
@@ -47,8 +48,9 @@ CategoryToAdd.value = {
 CategoryToUpdate.value = {
   name: "",
   limitamount: 0,
+  id: 0,
 };
-
+let reloadlist = ref(false);
 const alertaddCategoryInputs = [
   {
     placeholder: 'Category Name',
@@ -80,19 +82,29 @@ const alertupdateCategoryInputs = [
 
 const alertupdateCategoryButtons = [{
   text: 'Action',
-  handler: () => updateCategory(CategoryToUpdate.value as Category, 1),
+  handler: (data) => {
+    CategoryToUpdate.value.name = data['Category Name'];
+    CategoryToUpdate.value.limitamount = data.Limit;
+    updateCategory(CategoryToUpdate.value as Category, CategoryToUpdate.value.id as number);
+    
+  },
 }];
 
-// Kp wieso es rot azeigt aber es funktioniert
+
+
+// Kp wieso es rot azeigt aber es funktioniert, nice!
 const alertaddCategoryButtons = [{
   text: 'Action',
   handler: (data) => {
     CategoryToAdd.value.name = data['Category Name'];
     CategoryToAdd.value.limitamount = data.Limit;
     addNewCategory(CategoryToAdd.value as Category);
-    getCategories();
+    
   },
 }];
+watch(() => CategoryToAdd.value, () => {
+  getCategories();
+});
 
 onMounted(() => {
   getCategories();
@@ -103,16 +115,25 @@ let showUpdateAlert = ref(false);
 function setOpen(value: boolean) {
   showUpdateAlert.value = value;
 }
-
-function openUpdateAlert() {
+function setthisCategoryToUpdate(c: Category) {
+  CategoryToUpdate.value = {
+    name: c.name,
+    limitamount: c.limitamount,
+    id: c.id,
+  };
+}
+function openUpdateAlert(category: Category) {
+  setthisCategoryToUpdate(category);
   event?.preventDefault();
   setOpen(true);
 }
 
-function triggerDeleteFunction(id: number): void {
+function triggerDeleteFunction(id: number){
+  event?.preventDefault();
   if (confirm('Are you sure you want to delete this category?')) {
     deleteCategoryFunction(id);
   }
+  
 }
 
 async function deleteCategoryFunction(id: number): Promise<void> {
@@ -136,16 +157,18 @@ async function deleteCategoryFunction(id: number): Promise<void> {
 
       <ion-list lines="inset" :inset="true">
 
-        <ion-item class="ion-justify-content-between" v-for="category in categories" :key="category.id"
-          :router-link="'/tabs/categories/' + category.name">
+        <ion-item class="ion-justify-content-between" v-for="category in categories" :key="category.id">
+          
 
           <ion-label>{{ category.name }}</ion-label>
           <!--<ion-label>{{ category.limitamount }}SUM API?</ion-label>-->
           <ion-label v-if="category.name == 'Essen'"><ion-icon :icon="fastFoodOutline"></ion-icon></ion-label>
-          <ion-label v-if="category.name == 'Freizeit'"><ion-icon :icon="airplaneOutline"></ion-icon></ion-label>
-          <ion-label v-if="category.name == 'Wohnen'"><ion-icon :icon="homeOutline"></ion-icon></ion-label>
-          <ion-label v-if="category.name == 'Sonstiges'"><ion-icon :icon="starOutline"></ion-icon></ion-label>
-          <ion-label><ion-icon :icon="createOutline" @click="openUpdateAlert"></ion-icon></ion-label>
+          <ion-label v-else-if="category.name == 'Freizeit'"><ion-icon :icon="airplaneOutline"></ion-icon></ion-label>
+          <ion-label v-else-if="category.name == 'Wohnen'"><ion-icon :icon="homeOutline"></ion-icon></ion-label>
+          <ion-label v-else-if="category.name == 'Sonstiges'"><ion-icon :icon="starOutline"></ion-icon></ion-label>
+          <ion-label v-else><ion-icon :icon="cashOutline"></ion-icon></ion-label>
+
+          <ion-label><ion-icon :icon="createOutline" @click="openUpdateAlert(category) "></ion-icon></ion-label>
           <ion-label><ion-icon :icon="trashBinOutline" slot="end"
               @click="triggerDeleteFunction(category.id as number)"></ion-icon></ion-label>
 

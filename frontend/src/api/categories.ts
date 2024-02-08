@@ -61,7 +61,7 @@ export async function updateaCategory(id:number,c:Category) {
         withCredentials: true,
     }
     try {
-        const response = await axios.post(API_ROOT+"/api/categories/"+id,c, config);
+        const response = await axios.put(API_ROOT+"/api/categories/"+id,c, config);
         console.log(response);
         return response;
     } catch (error) {

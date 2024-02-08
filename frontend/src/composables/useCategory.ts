@@ -28,6 +28,7 @@ export function useCategory(){
         try {
             
             addCategory(c);
+            
             console.log("Category added");
         } catch (error) {
             console.log(error); // FIXME: Errorhandling
