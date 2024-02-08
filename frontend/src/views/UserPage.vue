@@ -28,7 +28,7 @@ onMounted(() => {
 
 const handleClick = () => {
   // setBalance(newBalance);
-// INSERT ALERT WITH FORM TO CHANGE BALANCE
+  // INSERT ALERT WITH FORM TO CHANGE BALANCE
 
   console.log('Clicked on Geplante monatliche Ausgaben');
 }
@@ -62,7 +62,15 @@ const handleClick = () => {
         </ion-row>
         <!-- Weitere Zeilen für zusätzliche Benutzerinformationen -->
       </ion-grid>
-      <p v-else>No user data available</p>
+      <ion-grid v-else>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Daten werden geladen</ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-content>
   </ion-page>
 </template>

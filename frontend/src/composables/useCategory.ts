@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import { Expense } from '@/model/expense';
-import { getAllCategories, getCategory, addCategory, deleteaCategory, updateaCategory} from '@/api/categories';
+import { getAllCategories, getCategory, addCategory, deleteaCategory, updateaCategory} from '@/api/categories'; 
 import { Category } from '@/model/category';
 
 export function useCategory(){

@@ -22,6 +22,19 @@ export  async function addanExpense(expense:Expense, id:number) {
     }
   }
 
+  export  async function getAllExpenses(categoryName) {
+    const config = {        
+        withCredentials: true
+    }
+    try {
+        const response = await axios.get(API_ROOT+"/api/categories/"+categoryName, config);
+        console.log(response);
+        return response.data;
+    } catch (error) {
+        return <any>error;   
+    }
+}
+
 
 
   
