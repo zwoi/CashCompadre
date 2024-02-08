@@ -8,6 +8,7 @@ import { User } from '@/model/user';
 
 export function useUser() {
 
+    
     const user = ref<User>();
 
     const getUserValues = async () => {

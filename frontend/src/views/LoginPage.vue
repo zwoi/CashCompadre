@@ -44,9 +44,9 @@ import {
 } from "@ionic/vue";
 import { useLogin } from "../composables/useLogin";
 import { body, notifications, options } from "ionicons/icons";
-import { LocalNotifications, ScheduleOptions } from "@capacitor/local-notifications";
-function loginnot(){
-  let options:ScheduleOptions={
+/* import { LocalNotifications, ScheduleOptions } from "@capacitor/local-notifications";
+ */function loginnot(){
+  /* let options:ScheduleOptions={
     notifications: [{
       id:111,
       title: "Hello",
@@ -55,7 +55,7 @@ function loginnot(){
   }],
 }
     LocalNotifications.schedule(options);
-  
+  */
   login();
 }
 const { username, password, login } = useLogin();
