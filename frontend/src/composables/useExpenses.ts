@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import { Expense } from '@/model/expense';
-import { addanExpense, getAllExpenses } from '@/api/expenses';
+import { addanExpense, getAllExpenses, deleteanExpense } from '@/api/expenses';
  
 export function useExpenses() {
 
@@ -23,9 +23,17 @@ export function useExpenses() {
          }
      }
 
+     const deleteExpense = async (categoryId:number, expenseId:number) => {
+        try{
+            expenses.value = await deleteanExpense(categoryId,expenseId);
+        }catch(error){
+            console.log(error);
+        }
+    }
 
 
 
-    return { expenses, getExpenses, addExpense };
+
+    return { expenses, getExpenses, addExpense, deleteExpense };
 
 }

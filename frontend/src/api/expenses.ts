@@ -22,7 +22,7 @@ export  async function addanExpense(expense:Expense, id:number) {
     }
   }
 
-  export  async function getAllExpenses(categoryName) {
+  export  async function getAllExpenses(categoryName:string) {
     const config = {        
         withCredentials: true
     }
@@ -30,6 +30,19 @@ export  async function addanExpense(expense:Expense, id:number) {
         const response = await axios.get(API_ROOT+"/api/categories/"+categoryName, config);
         console.log(response);
         return response.data;
+    } catch (error) {
+        return <any>error;   
+    }
+}
+
+export async function deleteanExpense(categoryId:number, expenseId:number) {
+    const config = {        
+        withCredentials: true
+    }
+    try {
+        const response = await axios.delete(API_ROOT+"/api/categories/"+categoryId+"/expenses/"+expenseId, config);
+        console.log(response);
+        return response;
     } catch (error) {
         return <any>error;   
     }

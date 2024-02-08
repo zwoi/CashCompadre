@@ -23,7 +23,7 @@ console.log(route.params.id);
 
 const categorytitle = route.params.id as string;
 const { categories, category, getOneCategory, getCategories } = useCategory();
-const { expenses, addExpense, getExpenses } = useExpenses();
+const { expenses, addExpense, getExpenses, deleteExpense } = useExpenses();
 
 const ExpenseToAdd = ref<Expense>();
 const ExpenseToUpdate = ref<Expense>();
@@ -57,6 +57,12 @@ const alertaddExpensesButtons = [{
         getExpenses(category.value?.id);
     },
 }];
+
+function triggerDeleteFunction(cateforyId: number, expenseId: number): void {
+    if (confirm('Are you sure you want to delete this expense?')) {
+        deleteExpense(cateforyId, expenseId);
+    }
+}
 
 
 onMounted(() => {
@@ -97,6 +103,8 @@ watchEffect(() => {
                 <ion-item v-for="expense in category.expenses" :key="expense.id">
                     <ion-label>{{ expense.note }}</ion-label>
                     <ion-label>{{ expense.amount }}</ion-label>
+                    <ion-label><ion-icon :icon="trashBinOutline" slot="end"
+                            @click="triggerDeleteFunction(category.id as number, expense.id as number)"></ion-icon></ion-label>
                 </ion-item>
                 <!-- Anzeigen des Gesamtbetrags als zusätzlicher Eintrag -->
                 <ion-item>
@@ -121,27 +129,28 @@ watchEffect(() => {
 
 <style scoped>
 ion-alert {
-  --color: white;
+    --color: white;
 }
 
 ion-alert .inputs {
-  --color: white;
+    --color: white;
 }
 
 ion-alert .input-wrapper {
-  --color: white;
+    --color: white;
 }
 
 ion-list {
-  --ion-item-background: #006e0000;
+    --ion-item-background: #006e0000;
 
 }
 
 ion-item {
-  --ion-item-background: #b3b3b3a4;
-  -moz-box-align: stretch;
+    --ion-item-background: #b3b3b3a4;
+    -moz-box-align: stretch;
 }
 
 #seperator {
-  --ion-item-justify-content: space-between;
-}</style>
+    --ion-item-justify-content: space-between;
+}
+</style>
