@@ -112,7 +112,7 @@ const alertaddCategoryButtons = [{
 
 onMounted(() => {
   getCategories();
-
+}
 
 
 let showUpdateAlert = ref(false);
