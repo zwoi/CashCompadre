@@ -174,6 +174,7 @@ async function deleteCategoryFunction(id: number): Promise<void> {
           <ion-label v-else><ion-icon :icon="cashOutline"></ion-icon></ion-label>
 
           <ion-label><ion-icon :icon="createOutline" @click="openUpdateAlert(category) "></ion-icon></ion-label>
+          <ion-label>Limit: {{ category.limitAmount }}</ion-label>
           <ion-label><ion-icon :icon="trashBinOutline" slot="end"
               @click="triggerDeleteFunction(category.id as number)"></ion-icon></ion-label>
 
