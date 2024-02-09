@@ -21,9 +21,11 @@ export function useExpenses() {
     const addExpense = async (e:Expense , id:number, categoryName:string) => {
          try {
              await addanExpense(e,id);
+             await getOneCategory(categoryName);
+             await getAllExpenses(categoryName);
              getExpenses(categoryName);
-             getOneCategory(categoryName);
-             console.log(categoryName)
+             
+             console.log(categoryName);
          } catch (error) {
              console.log(error); // FIXME: Errorhandling
          }
