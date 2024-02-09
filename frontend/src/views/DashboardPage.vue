@@ -25,9 +25,10 @@ import { ref } from "vue";
 import { add } from 'ionicons/icons';
 import { useExpenses } from "@/composables/useExpenses";
 import { Expense } from "@/model/expense";
-import { User } from "@/model/user";
+import { User, categories } from "@/model/user";
 import { onMounted, } from "vue";
 import { useUser } from '../composables/useUser';
+import { Category } from "@/model/category";
 import {useCategory} from "@/composables/useCategory";
 const { thisuser, getUserValues, setBalance } = useUser();
 const{categories, getCategories} = useCategory();
@@ -42,10 +43,17 @@ ExpenseToAdd.value = {
 
 
 function calculateRestGeld() {
-  if (thisuser.value) { // Ensure user.value is not undefined
+  if (thisuser.value && categories) { // Ensure user.value is not undefined
     let restGeld = thisuser.value.balance;
+    
     for (let i = 0; i < categories.value.length; i++) {
+      let category = user.categories[i];
+
+      console.log("Categories: "+ categories.value[i].limitamount);
+      console.log("Cats: "+category.name)
+
       restGeld -= categories.value[i].limitamount;
+      console.log("Restgeld: " + restGeld);
     }
     console.log("Restgeld: " + restGeld);
     return restGeld;
@@ -96,8 +104,9 @@ const alertsetBalanceCategoryButtons = [{
 }];
 
 onMounted(async () => {
-  getUserValues();
-  getCategories();
+    await getUserValues(); // Await getUserValues() to complete
+    await getCategories();
+    calculateRestGeld();
 });
 
 
@@ -113,12 +122,10 @@ onMounted(async () => {
           <ion-title>Dashboard</ion-title>
         </ion-toolbar>
       </ion-header>
-      <ion-button @click="setBalance(12)"></ion-button>
         <ion-list v-if="thisuser">
         <ion-item>
           <ion-label>Geplante monatliche Ausgaben:</ion-label>
           <ion-text>{{ thisuser.balance }}</ion-text>
-          <h1>{{ thisuser.balance }}</h1>
           <ion-label><ion-icon :icon="createOutline" @click="opensetBalanceAlert"></ion-icon></ion-label>
         </ion-item>
         <!-- Weitere Zeilen für zusätzliche Benutzerinformationen -->
