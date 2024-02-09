@@ -112,11 +112,15 @@ const alertaddCategoryButtons = [{
 
 onMounted(() => {
   getCategories();
-}
 
+ 
+});
 
 let showUpdateAlert = ref(false);
 
+function setOpen(value: boolean) {
+  showUpdateAlert.value = value;
+}
 function setthisCategoryToUpdate(c: Category) {
   CategoryToUpdate.value = {
     name: c.name,
@@ -140,7 +144,7 @@ function triggerDeleteFunction(id: number){
 async function deleteCategoryFunction(id: number): Promise<void> {
   try {
     await deleteCategory(id);
-    
+    getCategories();
   } catch (error) {
     console.error('Error deleting category:', error);
   }
