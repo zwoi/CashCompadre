@@ -90,24 +90,30 @@ const alertupdateCategoryButtons = [{
   },
 }];
 
-
-
 // Kp wieso es rot azeigt aber es funktioniert, nice!
 const alertaddCategoryButtons = [{
   text: 'Action',
-  handler: (data) => {
+  handler: async (data) => {
     CategoryToAdd.value.name = data['Category Name'];
     CategoryToAdd.value.limitamount = data.Limit;
-    addNewCategory(CategoryToAdd.value as Category);
-    reloadlist.value = !reloadlist.value;
+
+    try {
+      // Hinzufügen der Kategorie und warten, bis es abgeschlossen ist
+      await addNewCategory(CategoryToAdd.value as Category);
+      // Nachdem die Kategorie hinzugefügt wurde, aktualisiere die Liste
+      getCategories();
+    } catch (error) {
+      console.error('Error adding category:', error);
+    }
   },
 }];
-watch(() => CategoryToAdd.value, () => {
-  getCategories();
-});
 
 onMounted(() => {
   getCategories();
+
+  watch(() => reloadlist.value, () => {
+    getCategories();
+  });
 });
 
 let showUpdateAlert = ref(false);
@@ -133,7 +139,6 @@ function triggerDeleteFunction(id: number){
   if (confirm('Are you sure you want to delete this category?')) {
     deleteCategoryFunction(id);
   }
-  
 }
 
 async function deleteCategoryFunction(id: number): Promise<void> {
