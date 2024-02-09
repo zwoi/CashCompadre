@@ -30,12 +30,16 @@ import { onMounted, } from "vue";
 import { useUser } from '../composables/useUser';
 import { Category } from "@/model/category";
 import { useCategory } from "@/composables/useCategory";
+import Chart from 'chart.js/auto';
+
 const { thisuser, getUserValues, setBalance } = useUser();
 const { categories, getCategories } = useCategory();
 const text = ref('!');
 const ExpenseToAdd = ref<Expense>();
-ExpenseToAdd.value = {
 
+let myChart; // Um die Diagramminstanz zu speichern
+
+ExpenseToAdd.value = {
   category: 1,
   note: 'hello',
   amount: 1,
@@ -96,8 +100,40 @@ const alertsetBalanceCategoryButtons = [{
 onMounted(async () => {
   await getUserValues(); // Await getUserValues() to complete
   await getCategories();
+  createChart();
   calculateRestGeld();
 });
+
+function generateRandomColor() {
+  // Generieren Sie eine zufällige Hex-Farbe
+  return `#${Math.floor(Math.random()*16777215).toString(16)}`;
+}
+
+function createChart() {
+  const ctx = document.getElementById('myChart').getContext('2d');
+
+  // Extrahieren Sie die Kategorien und ihre LimitAmounts aus den Daten
+  const categoryLabels = categories.value.map(category => category.name);
+  const categoryLimits = categories.value.map(category => category.limitAmount);
+
+  // Generieren Sie zufällige Farben für die Kategorien
+  const categoryColors = categories.value.map(() => generateRandomColor());
+
+  myChart = new Chart(ctx, {
+    type: 'pie', // Hier können Sie den Diagrammtyp ändern (z.B. 'bar' für Balkendiagramme)
+    data: {
+      labels: categoryLabels,
+      datasets: [{
+        data: categoryLimits,
+        backgroundColor: categoryColors,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+    },
+  });
+}
 
 </script>
 
@@ -130,6 +166,10 @@ onMounted(async () => {
           <ion-label>Daten werden geladen</ion-label>
         </ion-item>
       </ion-list>
+
+      <div style="max-width: 400px; margin: auto;">
+        <canvas id="myChart"></canvas>
+      </div>
 
       <ion-alert :isOpen="showsetBalanceAlert" @didDismiss="setOpen(false)" header="Update ur Balance!"
         :buttons="alertsetBalanceCategoryButtons" :inputs="alertsetBalanceCategoryInputs">
