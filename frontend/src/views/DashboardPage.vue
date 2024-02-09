@@ -105,22 +105,19 @@ onMounted(async () => {
 });
 
 function generateRandomColor() {
-  // Generieren Sie eine zufällige Hex-Farbe
   return `#${Math.floor(Math.random()*16777215).toString(16)}`;
 }
 
 function createChart() {
   const ctx = document.getElementById('myChart').getContext('2d');
 
-  // Extrahieren Sie die Kategorien und ihre LimitAmounts aus den Daten
   const categoryLabels = categories.value.map(category => category.name);
   const categoryLimits = categories.value.map(category => category.limitAmount);
-
-  // Generieren Sie zufällige Farben für die Kategorien
+  
   const categoryColors = categories.value.map(() => generateRandomColor());
 
   myChart = new Chart(ctx, {
-    type: 'pie', // Hier können Sie den Diagrammtyp ändern (z.B. 'bar' für Balkendiagramme)
+    type: 'pie',
     data: {
       labels: categoryLabels,
       datasets: [{
