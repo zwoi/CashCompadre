@@ -124,7 +124,7 @@ function  sumExpenses(){
                 </ion-item>
                 <!-- Anzeigen des Gesamtbetrags als zusätzlicher Eintrag -->
                 <!-- wenn leer kein EIntrag -->
-                <ion-item v-if="category.expenses.length>0">
+                <ion-item>
                     <ion-label>Total</ion-label>
                     <ion-label>{{ totalAmount }}</ion-label>
                     <ion-label>Limit: {{ category.limitAmount }}</ion-label>
