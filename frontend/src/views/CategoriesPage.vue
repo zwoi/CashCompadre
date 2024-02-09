@@ -22,7 +22,7 @@ import {
   alertController,
 } from "@ionic/vue";
 
-import { ref, watch } from "vue"; 
+import { ref, watch, watchEffect } from "vue"; 
 import {
   add,
   airplaneOutline,
@@ -40,6 +40,8 @@ const { categories, getCategories, addNewCategory, deleteCategory, updateCategor
 
 const CategoryToAdd = ref<Category>();
 const CategoryToUpdate = ref<Category>();
+
+
 
 CategoryToAdd.value = {
   name: "",
@@ -111,16 +113,10 @@ const alertaddCategoryButtons = [{
 onMounted(() => {
   getCategories();
 
-  watch(() => reloadlist.value, () => {
-    getCategories();
-  });
-});
+
 
 let showUpdateAlert = ref(false);
 
-function setOpen(value: boolean) {
-  showUpdateAlert.value = value;
-}
 function setthisCategoryToUpdate(c: Category) {
   CategoryToUpdate.value = {
     name: c.name,

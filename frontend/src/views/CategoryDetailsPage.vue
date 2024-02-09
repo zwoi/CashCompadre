@@ -112,7 +112,7 @@ function  sumExpenses(){
         </ion-header>
         <ion-content>
             <ion-list v-if="category">
-                <ion-item v-for="expense in category.expenses" :key="expense.id">
+                <ion-item v-for="expense in category.expenses" :key="expense.id" >
                     <ion-label>{{ expense.note }}</ion-label>
                     <ion-label>{{ expense.amount }}</ion-label>
                     <ion-label><ion-icon :icon="trashBinOutline" slot="end"
