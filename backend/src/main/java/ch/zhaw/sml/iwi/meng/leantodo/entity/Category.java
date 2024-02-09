@@ -23,9 +23,9 @@ public class Category {
     public Category() {
     }
 
-    public Category(String name, Integer limit) {
+    public Category(String name, Integer limitAmount) {
         this.name = name;
-        this.limitAmount = limit;
+        this.limitAmount = limitAmount;
     }
 
     private String name;
