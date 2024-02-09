@@ -53,14 +53,14 @@ const alertaddExpensesButtons = [{
     handler: (data) => {
         ExpenseToAdd.value.note = data['Expense Note'];
         ExpenseToAdd.value.amount = data.amount;
-        addExpense(ExpenseToAdd.value as Expense, category.value?.id); //addCategoryID
+        addExpense(ExpenseToAdd.value as Expense, category.value?.id, categorytitle); //addCategoryID
         getExpenses(category.value?.id);
     },
 }];
 
 function triggerDeleteFunction(cateforyId: number, expenseId: number): void {
     if (confirm('Are you sure you want to delete this expense?')) {
-        deleteExpense(cateforyId, expenseId);
+        deleteExpense(cateforyId, expenseId,categorytitle);
     }
 }
 
@@ -68,6 +68,7 @@ function triggerDeleteFunction(cateforyId: number, expenseId: number): void {
 onMounted(() => {
     getOneCategory(categorytitle);
     sumExpenses();
+    getExpenses(categorytitle);
 });
 
 let totalAmount = 0;
