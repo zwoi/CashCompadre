@@ -27,6 +27,7 @@ const { expenses, addExpense, getExpenses, deleteExpense } = useExpenses();
 
 const ExpenseToAdd = ref<Expense>();
 const ExpenseToUpdate = ref<Expense>();
+const thiscategory = ref<Category>();
 
 ExpenseToAdd.value = {
     note: "",
@@ -97,6 +98,8 @@ function  sumExpenses(){
     return sum;
 }
 
+
+
 </script>
 
 <template>
@@ -124,6 +127,7 @@ function  sumExpenses(){
                 <ion-item v-if="category.expenses.length>0">
                     <ion-label>Total</ion-label>
                     <ion-label>{{ totalAmount }}</ion-label>
+                    <ion-label>{{ category.limitAmount }}</ion-label>
                 </ion-item>
             </ion-list>
 
