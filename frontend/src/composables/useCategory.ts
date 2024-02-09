@@ -26,10 +26,9 @@ export function useCategory(){
     
     const addNewCategory = async (c: Category) => {
         try {
-            
-            addCategory(c);
-            
+            await addCategory(c);
             console.log("Category added");
+            getCategories();
         } catch (error) {
             console.log(error); // FIXME: Errorhandling
         }
@@ -38,8 +37,9 @@ export function useCategory(){
     const deleteCategory = async (id: number) => {
         try {
             //const response = await deleteCategory(id);
-            deleteaCategory(id);
+            await deleteaCategory(id);
             console.log("Category deleted");
+            getCategories();
         } catch (error) {
             console.log(error); // FIXME: Errorhandling
         }

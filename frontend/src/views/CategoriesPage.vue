@@ -144,7 +144,7 @@ function triggerDeleteFunction(id: number){
 async function deleteCategoryFunction(id: number): Promise<void> {
   try {
     await deleteCategory(id);
-    getCategories();
+    
   } catch (error) {
     console.error('Error deleting category:', error);
   }
