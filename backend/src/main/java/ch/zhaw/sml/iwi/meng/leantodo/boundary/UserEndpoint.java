@@ -50,10 +50,10 @@ public class UserEndpoint {
     @PutMapping("/api/balance")
     public ResponseEntity<Void> updateBalance(
             Principal principal,
-            @RequestBody Integer updatedBalance) {
+            @RequestBody Integer updatedBalanceValue) {
 
         try {
-            userController.updateBalance(principal.getName(), updatedBalance);
+            userController.updateBalance(principal.getName(), updatedBalanceValue);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

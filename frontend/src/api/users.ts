@@ -22,17 +22,22 @@ export  async function getUser() {
 
   export async function changeBalance(changedBalance: number) {
     console.log("api Balance: "+changedBalance);
+    console.log("api BalanceDatatype: "+typeof(changedBalance));
     const config = {
         withCredentials: true,
+        headers: {
+            'Content-Type': 'application/json' // Make sure to set the appropriate content type if needed
+        }
     }
 
     try {
         const response = await axios.put(API_ROOT + "/api/balance", changedBalance, config);
-        
+        changedBalance = Number(changedBalance);
         console.log(response);
         return response.data; // Return the response data
     } catch (error) {
         console.log("ERROR: "+changedBalance);
+        console.log("api BalanceDatatype after: "+typeof(changedBalance));
         console.error("Error while changing balance:", error);
         throw error; // Throw the error so that the caller can handle it
     }

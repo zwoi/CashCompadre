@@ -23,6 +23,7 @@ export function useUser() {
         console.log("setBalanceValue: " +changedBalance);
         if (thisuser.value) {
             try {
+                changedBalance = Number(changedBalance);
                 await changeBalance(changedBalance);
                 thisuser.value.balance = changedBalance;
             } catch (error) {
