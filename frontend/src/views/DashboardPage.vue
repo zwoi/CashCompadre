@@ -112,7 +112,7 @@ onMounted(async () => {
 
       <ion-list v-if="thisuser">
         <ion-item>
-          <ion-label>Geplante monatliche Ausgaben:</ion-label>
+          <ion-label>Monatliche Einnahmen:</ion-label>
           <h1>{{ thisuser.balance }}</h1>
           <ion-label><ion-icon :icon="createOutline" @click="opensetBalanceAlert"></ion-icon></ion-label>
         </ion-item>
