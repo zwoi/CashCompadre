@@ -29,9 +29,9 @@ import { User, categories } from "@/model/user";
 import { onMounted, } from "vue";
 import { useUser } from '../composables/useUser';
 import { Category } from "@/model/category";
-import {useCategory} from "@/composables/useCategory";
+import { useCategory } from "@/composables/useCategory";
 const { thisuser, getUserValues, setBalance } = useUser();
-const{categories, getCategories} = useCategory();
+const { categories, getCategories } = useCategory();
 const text = ref('!');
 const ExpenseToAdd = ref<Expense>();
 ExpenseToAdd.value = {
@@ -41,38 +41,28 @@ ExpenseToAdd.value = {
   amount: 1,
 };
 
-
 function calculateRestGeld() {
-  if (thisuser.value && categories) { // Ensure user.value is not undefined
+  if (thisuser.value && categories.value) {
     let restGeld = thisuser.value.balance;
-    
     for (let i = 0; i < categories.value.length; i++) {
-      let category = user.categories[i];
-
-      console.log("Categories: "+ categories.value[i].limitamount);
-      console.log("Cats: "+category.name)
-
-      restGeld -= categories.value[i].limitamount;
+      console.log("Categories: " + categories.value[i].limitAmount);
+      console.log("Cats: " + categories.value[i].name);
+      restGeld -= categories.value[i].limitAmount; // Deduct the category limit
       console.log("Restgeld: " + restGeld);
     }
     console.log("Restgeld: " + restGeld);
     return restGeld;
   } else {
-    console.log('User is not defined');
+    console.log('User or categories are not defined');
     console.log(thisuser.value);
     console.log(categories.value);
-
-    return 0; // or any default value when user is not defined
+    return 0;
   }
 }
 
-
 const UserToUpdate = ref<User>();
-  UserToUpdate.value = {
-
-
-balance: 0,
-
+UserToUpdate.value = {
+  balance: 0,
 };
 let showsetBalanceAlert = ref(false);
 
@@ -104,13 +94,10 @@ const alertsetBalanceCategoryButtons = [{
 }];
 
 onMounted(async () => {
-    await getUserValues(); // Await getUserValues() to complete
-    await getCategories();
-    calculateRestGeld();
+  await getUserValues(); // Await getUserValues() to complete
+  await getCategories();
+  calculateRestGeld();
 });
-
-
-
 
 </script>
 
@@ -122,14 +109,22 @@ onMounted(async () => {
           <ion-title>Dashboard</ion-title>
         </ion-toolbar>
       </ion-header>
-        <ion-list v-if="thisuser">
+
+      <ion-list v-if="thisuser">
         <ion-item>
           <ion-label>Geplante monatliche Ausgaben:</ion-label>
-          <ion-text>{{ thisuser.balance }}</ion-text>
+          <h1>{{ thisuser.balance }}</h1>
           <ion-label><ion-icon :icon="createOutline" @click="opensetBalanceAlert"></ion-icon></ion-label>
         </ion-item>
+
+        <ion-item>
+          <ion-label>Restgeld:</ion-label>
+          <h1>{{ calculateRestGeld() }}</h1>
+        </ion-item>
+
         <!-- Weitere Zeilen für zusätzliche Benutzerinformationen -->
       </ion-list>
+
       <ion-list v-else>
         <ion-item>
           <ion-label>Daten werden geladen</ion-label>
@@ -139,9 +134,6 @@ onMounted(async () => {
       <ion-alert :isOpen="showsetBalanceAlert" @didDismiss="setOpen(false)" header="Update ur Balance!"
         :buttons="alertsetBalanceCategoryButtons" :inputs="alertsetBalanceCategoryInputs">
       </ion-alert>
-
-
     </ion-content>
   </ion-page>
 </template>
-  
