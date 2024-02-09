@@ -79,16 +79,19 @@ function opensetBalanceAlert() {
 const alertsetBalanceCategoryInputs = [
   {
     type: 'number',
-    name: 'Balance',
+    name: 'balance',
     placeholder: 'Balance',
-    balance: UserToUpdate.value.balance,
+    balance: 0,
   },
 ];
 
 const alertsetBalanceCategoryButtons = [{
   text: 'Action',
-  handler: () => {
-    setBalance(UserToUpdate.value.balance);
+  handler: (data) => {
+    console.log("action: " + data.balance);
+    UserToUpdate.value.balance = data.balance;
+    console.log("action 2: " + UserToUpdate.value.balance);
+    setBalance(UserToUpdate.value.balance as number);
     setOpen(false);
   },
 }];
