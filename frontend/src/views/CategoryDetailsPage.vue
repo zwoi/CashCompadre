@@ -126,7 +126,7 @@ function  sumExpenses(){
                 <ion-item v-if="category.expenses.length>0">
                     <ion-label>Total</ion-label>
                     <ion-label>{{ totalAmount }}</ion-label>
-                    <ion-label>{{ category.limitAmount }}</ion-label>
+                    <ion-label>Limit: {{ category.limitAmount }}</ion-label>
                 </ion-item>
             </ion-list>
 
