@@ -118,7 +118,7 @@ onMounted(async () => {
         </ion-item>
 
         <ion-item>
-          <ion-label>Restgeld:</ion-label>
+          <ion-label>Voraussichtliche monatliche Ersparnisse:</ion-label>
           <h1>{{ calculateRestGeld() }}</h1>
         </ion-item>
 

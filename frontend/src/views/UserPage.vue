@@ -73,15 +73,6 @@ const handleClick = () => {
             </ion-item>
           </ion-col>
         </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-item @click="handleClick">
-              <ion-label>Geplante monatliche Ausgaben:</ion-label>
-              <ion-text>{{ Limitall }}</ion-text>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <!-- Weitere Zeilen für zusätzliche Benutzerinformationen -->
       </ion-grid>
       <ion-grid v-else>
         <ion-row>
