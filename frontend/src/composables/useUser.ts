@@ -20,7 +20,6 @@ export function useUser() {
     }
  
     const setBalance = async (changedBalance: number) => {
-        console.log("setBalanceValue: " +changedBalance);
         if (thisuser.value) {
             try {
                 changedBalance = Number(changedBalance);

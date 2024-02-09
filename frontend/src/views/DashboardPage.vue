@@ -53,6 +53,7 @@ function calculateRestGeld() {
     console.log('User is not defined');
     console.log(thisuser.value);
     console.log(categories.value);
+
     return 0; // or any default value when user is not defined
   }
 }
@@ -88,9 +89,7 @@ const alertsetBalanceCategoryInputs = [
 const alertsetBalanceCategoryButtons = [{
   text: 'Action',
   handler: (data) => {
-    console.log("action: " + data.balance);
     UserToUpdate.value.balance = data.balance;
-    console.log("action 2: " + UserToUpdate.value.balance);
     setBalance(UserToUpdate.value.balance as number);
     setOpen(false);
   },

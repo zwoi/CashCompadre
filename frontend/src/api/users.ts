@@ -21,8 +21,6 @@ export  async function getUser() {
  
 
   export async function changeBalance(changedBalance: number) {
-    console.log("api Balance: "+changedBalance);
-    console.log("api BalanceDatatype: "+typeof(changedBalance));
     const config = {
         withCredentials: true,
         headers: {
