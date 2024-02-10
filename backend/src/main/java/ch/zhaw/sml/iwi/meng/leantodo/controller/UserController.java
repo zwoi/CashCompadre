@@ -30,7 +30,6 @@ private static final Logger LOGGER = Logger.getLogger(ClassName.class.getName())
         User user = new User();
         user.setLoginName(username);
         user.setPasswordHash(new BCryptPasswordEncoder().encode(password));
-
         user.getCategories().add(new Category("Essen", 600));
         user.getCategories().add(new Category("Freizeit", 300));
         user.getCategories().add(new Category("Wohnen", 100));
