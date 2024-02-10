@@ -59,7 +59,7 @@ const handleClick = () => {
 
 <template>
   <ion-page>
-    <ion-content>
+    <ion-content class="ion-padding">
       <ion-header>
         <ion-toolbar>
           <ion-title>Profile</ion-title>
@@ -89,3 +89,6 @@ const handleClick = () => {
   </ion-page>
 </template>
   
+<style scoped>
+
+</style>

@@ -75,7 +75,10 @@ onMounted(() => {
     sumExpenses();
     getExpenses(categorytitle);
 });
-
+const i=1;
+while(i >0){
+    getExpenses(categorytitle);
+}
 let totalAmount = 0;
 
 watchEffect(() => {

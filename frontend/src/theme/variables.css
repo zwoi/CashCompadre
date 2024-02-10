@@ -3,8 +3,8 @@ http://ionicframework.com/docs/theming/ */
 
 /** Ionic CSS Variables **/
 :root {
-  --ion-text-color: #ffffff;
-  --ion-background-color: #787d76;
+  --ion-text-color: #e0ddca;
+  --ion-background-color: #3c3d42;
   --ion-font-color:white;
   --text-input-placeholder-color: white;
   --text-alert-input-placeholder-color: white;
@@ -14,7 +14,7 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #3171e0;
+  --ion-color-primary-shade: #3171e000;
   --ion-color-primary-tint: #4c8dff;
 
   /** secondary **/
@@ -62,7 +62,7 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-dark-rgb: 34, 36, 40;
   --ion-color-dark-contrast: #ffffff;
   --ion-color-dark-contrast-rgb: 255, 255, 255;
-  --ion-color-dark-shade: #1e2023;
+  --ion-color-dark-shade: #1e202300;
   --ion-color-dark-tint: #383a3e;
 
   /** medium **/
@@ -70,7 +70,7 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-medium-rgb: 146, 148, 156;
   --ion-color-medium-contrast: #ffffff;
   --ion-color-medium-contrast-rgb: 255, 255, 255;
-  --ion-color-medium-shade: #808289;
+  --ion-color-medium-shade: #80828900;
   --ion-color-medium-tint: #9d9fa6;
 
   /** light **/
@@ -78,7 +78,7 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-rgb: 244, 245, 248;
   --ion-color-light-contrast: #000000;
   --ion-color-light-contrast-rgb: 0, 0, 0;
-  --ion-color-light-shade: #d7d8da;
+  --ion-color-light-shade: #d7d8da00;
   --ion-color-light-tint: #f5f6f9;
 }
 
@@ -89,15 +89,14 @@ http://ionicframework.com/docs/theming/ */
    */
 
   body {
-    --ion-text-color: #ffffff;
-    --ion-color-primary: #428cff;
-    --ion-color-primary-rgb: 66,140,255;
-    --ion-color-primary-contrast: #ffffff;
-    --ion-color-primary-contrast-rgb: 255,255,255;
-    --ion-color-primary-shade: #3a7be0;
-    --ion-color-primary-tint: #5598ff;
-
-    --ion-color-secondary: #50c8ff;
+    --ion-text-color: #e0ddca;
+    --ion-background-color: #3c3d42;
+    --ion-font-color:white;
+    --text-input-placeholder-color: white;
+    --text-alert-input-placeholder-color: white;
+    /** primary **/
+    
+    --ion-color-primary: #4cc28b;
     --ion-color-secondary-rgb: 80,200,255;
     --ion-color-secondary-contrast: #ffffff;
     --ion-color-secondary-contrast-rgb: 255,255,255;

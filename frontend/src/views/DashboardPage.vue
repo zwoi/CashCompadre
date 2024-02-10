@@ -113,7 +113,7 @@ function createChart() {
   const categoryLimits = categories.value.map(category => category.limitAmount);
 
   const categoryColors = categories.value.map(() => generateRandomColor());
-
+  Chart.defaults.color = '#e0ddca';
   myChart = new Chart(ctx, {
     type: 'pie',
     data: {
@@ -168,11 +168,11 @@ function createChart() {
         <ion-label>Deine geplante Ausgabenverteilung:</ion-label>
       </ion-item>
       </ion-list>
-
-      <div style="max-width: 400px; margin: auto;">
+      
+      <div style="max-width: 400px; margin: auto; color:white">
         <canvas id="myChart"></canvas>
       </div>
-
+    
       <ion-alert :isOpen="showsetBalanceAlert" @didDismiss="setOpen(false)" header="Update ur Balance!"
         :buttons="alertsetBalanceCategoryButtons" :inputs="alertsetBalanceCategoryInputs">
       </ion-alert>

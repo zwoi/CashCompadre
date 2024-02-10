@@ -5,19 +5,25 @@
           <ion-row justify-content-center>
             <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
               <ion-col>
-                <img class="logo" src="/images/logo.png" alt="CashCompadre logo" />
-              </ion-col>
+              
+                <ion-card>
+                
+                  <ion-img src="/images/logo.png" class="custom-image"></ion-img>
+                </ion-card>
+                </ion-col>
               <div>
-                <h1 class="title">CashCompadre login</h1>
+                <center>
+                <h1 class="title"> Handle your finances with ease!</h1>
+              </center>
               </div>
               <div>
                 <div class="">
-                <ion-item>
-                  <ion-input type="text" placeholder="Login Name" v-model="username"></ion-input>
+                <ion-item lines="none">
+                  <ion-input  type="text" placeholder="Login Name" v-model="username"></ion-input>
                 </ion-item>
               </div>
-                <ion-item>
-                  <ion-input type="password" placeholder="Password" v-model="password"></ion-input>
+                <ion-item lines="none">
+                  <ion-input color="dark" placeholder="Password" v-model="password"></ion-input>
                 </ion-item>
               </div>
               <div>
@@ -41,6 +47,8 @@ import {
   IonGrid,
   IonButton,
   IonItem,
+  IonImg,
+  IonCard
 } from "@ionic/vue";
 import { useLogin } from "../composables/useLogin";
 import { body, notifications, options } from "ionicons/icons";
@@ -65,6 +73,7 @@ const { username, password, login } = useLogin();
 <style>
 .title{
   color: white;
+  font-style: oblique;
 }
 .logo{
   width: 100%;
@@ -74,13 +83,31 @@ const { username, password, login } = useLogin();
   padding: 20px 0;
 }
 ion-item{
-  --border-radius: 5px;
-  padding-bottom: 10px;
-}
-.img{
   border-radius: 5px;
+  color: #f6f8e2;
+  outline-style: solid;
+  outline-width: 0.5px;
+  box-shadow: 0 !important;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  
 }
 
+ion-image{
+  width: 100%;
+  height: 100%;
+}
+ion-card{
+  border-radius: 5px;
+  color: #f6f8e2;
+  outline-style: solid;
+  outline-width: 0.5px;
+  box-shadow: 0 !important;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+ 
 
 
 </style>
