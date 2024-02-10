@@ -17,3 +17,16 @@ export async function getToken(username: string, password: string): Promise<User
         return <any>error;
     }
 }
+
+export async function loguserout() {
+
+    const config = {
+        withCredentials: true
+    }
+    try {
+        await axios.get(API_ROOT + '/auth/token', config);
+        console.log("logged out");
+    } catch (error) {
+        return <any>error;
+    }
+}

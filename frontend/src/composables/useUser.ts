@@ -30,6 +30,7 @@ export function useUser() {
             }
         }
     }
-    return { thisuser, getUserValues, setBalance,  };
+   
+    return { thisuser, getUserValues, setBalance };
 
 }

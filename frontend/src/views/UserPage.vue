@@ -15,7 +15,7 @@ import {
   IonLabel,
   IonText
 } from "@ionic/vue";
-
+import { useLogin } from "../composables/useLogin";
 import { onMounted, ref } from "vue";
 import { getUser } from "@/api/users";
 import { useUser } from '../composables/useUser'
@@ -23,7 +23,7 @@ import { User } from "@/model/user";
 import { useCategory } from "@/composables/useCategory";
 const { getCategories } = useCategory();
 const { thisuser, getUserValues, setBalance } = useUser();
-
+const { username, password, logout } = useLogin();
 const text = ref('!');
 
 onMounted(() => {
@@ -44,6 +44,7 @@ function sumlimitallCategories(){
     
   }
 }
+
 console.log(sum);
 return sum;
 }
@@ -83,6 +84,7 @@ const handleClick = () => {
           </ion-col>
         </ion-row>
       </ion-grid>
+      <ion-button @click="logout()">Logout</ion-button>
     </ion-content>
   </ion-page>
 </template>

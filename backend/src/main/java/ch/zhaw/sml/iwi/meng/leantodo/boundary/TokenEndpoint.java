@@ -40,6 +40,7 @@ public class TokenEndpoint {
         cookie.setPath("/");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
+        
     }
 
     private UserAuthResponse createTokenSetCookie(Principal principal, HttpServletResponse response) {

@@ -5,10 +5,10 @@
           <ion-row justify-content-center>
             <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
               <ion-col>
-                <img class="logo" src="/images/logo.png" alt="LeanTodo logo" />
+                <img class="logo" src="/images/logo.png" alt="CashCompadre logo" />
               </ion-col>
               <div>
-                <h1 class="title">LeanTodo login</h1>
+                <h1 class="title">CashCompadre login</h1>
               </div>
               <div>
                 <div class="">
