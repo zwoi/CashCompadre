@@ -45,11 +45,11 @@ const CategoryToUpdate = ref<Category>();
 
 CategoryToAdd.value = {
   name: "",
-  limitamount: 0,
+  limitAmount: 0,
 };
 CategoryToUpdate.value = {
   name: "",
-  limitamount: 0,
+  limitAmount: 0,
   id: 0,
 };
 let reloadlist = ref(false);
@@ -64,7 +64,7 @@ const alertaddCategoryInputs = [
     type: 'number',
     name: 'Limit',
     placeholder: 'Limit',
-    value: CategoryToAdd.value.limitamount,
+    value: CategoryToAdd.value.limitAmount,
   },
 ];
 
@@ -78,7 +78,7 @@ const alertupdateCategoryInputs = [
     type: 'number',
     name: 'Limit',
     placeholder: 'Limit',
-    value: CategoryToUpdate.value.limitamount,
+    value: CategoryToUpdate.value.limitAmount,
   },
 ];
 
@@ -86,7 +86,7 @@ const alertupdateCategoryButtons = [{
   text: 'Action',
   handler: (data) => {
     CategoryToUpdate.value.name = data['Category Name'];
-    CategoryToUpdate.value.limitamount = data.Limit;
+    CategoryToUpdate.value.limitAmount = data.Limit;
     updateCategory(CategoryToUpdate.value as Category, CategoryToUpdate.value.id as number);
     
   },
@@ -97,7 +97,9 @@ const alertaddCategoryButtons = [{
   text: 'Action',
   handler: async (data) => {
     CategoryToAdd.value.name = data['Category Name'];
-    CategoryToAdd.value.limitamount = data.Limit;
+    console.log(data.Limit);
+    CategoryToAdd.value.limitAmount = data.Limit;
+    console.log(CategoryToAdd.value);
 
     try {
       // Hinzufügen der Kategorie und warten, bis es abgeschlossen ist
@@ -124,7 +126,7 @@ function setOpen(value: boolean) {
 function setthisCategoryToUpdate(c: Category) {
   CategoryToUpdate.value = {
     name: c.name,
-    limitamount: c.limitamount,
+    limitAmount: c.limitAmount,
     id: c.id,
   };
 }

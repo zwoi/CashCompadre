@@ -35,7 +35,7 @@ export  async function getAllCategories() {
         }
         try {
             const response = await axios.post(API_ROOT+"/api/categories", c, config);
-            console.log(c.limitamount);
+            console.log(c.limitAmount);
             console.log(c.name);
             console.log(response);
             
