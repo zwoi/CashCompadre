@@ -101,7 +101,7 @@ onMounted(async () => {
 });
 
 function generateRandomColor() {
-  return `#${Math.floor(Math.random()*16777215).toString(16)}`;
+  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
 
 function createChart() {
@@ -109,7 +109,7 @@ function createChart() {
 
   const categoryLabels = categories.value.map(category => category.name);
   const categoryLimits = categories.value.map(category => category.limitAmount);
-  
+
   const categoryColors = categories.value.map(() => generateRandomColor());
 
   myChart = new Chart(ctx, {
@@ -142,8 +142,9 @@ function createChart() {
       <ion-list v-if="thisuser">
         <ion-item>
           <ion-label>Monatliche Einnahmen:</ion-label>
-          <h1>{{ thisuser.balance }}</h1>
           <ion-label><ion-icon :icon="createOutline" @click="opensetBalanceAlert"></ion-icon></ion-label>
+          <h1>{{ thisuser.balance }}</h1>
+
         </ion-item>
 
         <ion-item>
@@ -158,6 +159,12 @@ function createChart() {
         <ion-item>
           <ion-label>Daten werden geladen</ion-label>
         </ion-item>
+      </ion-list>
+
+      <ion-list>
+        <ion-item>
+        <ion-label>Deine geplante Ausgabenverteilung:</ion-label>
+      </ion-item>
       </ion-list>
 
       <div style="max-width: 400px; margin: auto;">
