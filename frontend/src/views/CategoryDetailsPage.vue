@@ -141,8 +141,6 @@ function sumExpenses() {
                             {{ category.limitAmount - totalAmount }}
                         </span>
                     </ion-label>
-
-
                 </ion-item>
             </ion-list>
 
