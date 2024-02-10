@@ -18,6 +18,8 @@ import {
 } from 'ionicons/icons';
 import { Category } from "@/model/category";
 import { Expense } from "@/model/expense";
+import { showToast } from '../composables/useToast';
+
 const route = useRoute();
 console.log(route.params.id);
 
@@ -56,12 +58,14 @@ const alertaddExpensesButtons = [{
         ExpenseToAdd.value.amount = data.amount;
         addExpense(ExpenseToAdd.value as Expense, category.value?.id, categorytitle); //addCategoryID
         getExpenses(category.value?.id);
+        showToast("Expense was successfully added!");
     },
 }];
 
 function triggerDeleteFunction(cateforyId: number, expenseId: number): void {
     if (confirm('Are you sure you want to delete this expense?')) {
         deleteExpense(cateforyId, expenseId, categorytitle);
+        showToast("Expense was successfully deleted!")
     }
 }
 

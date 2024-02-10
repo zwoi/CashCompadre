@@ -31,6 +31,7 @@ import { useUser } from '../composables/useUser';
 import { Category } from "@/model/category";
 import { useCategory } from "@/composables/useCategory";
 import Chart from 'chart.js/auto';
+import { showToast } from '../composables/useToast';
 
 const { thisuser, getUserValues, setBalance } = useUser();
 const { categories, getCategories } = useCategory();
@@ -90,6 +91,7 @@ const alertsetBalanceCategoryButtons = [{
     UserToUpdate.value.balance = data.balance;
     setBalance(UserToUpdate.value.balance as number);
     setOpen(false);
+    showToast("Balance wurde angepasst.");
   },
 }];
 
