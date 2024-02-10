@@ -47,8 +47,9 @@ export function useCategory(){
     const updateCategory = async (c:Category,id: number) => {
         try {
             //const response = await deleteCategory(id);
-            updateaCategory(id,c);
+            await updateaCategory(id,c);
             console.log("Category updated");
+            getCategories();
         } catch (error) {
             console.log(error); // FIXME: Errorhandling
         }

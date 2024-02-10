@@ -97,9 +97,7 @@ const alertaddCategoryButtons = [{
   text: 'Action',
   handler: async (data) => {
     CategoryToAdd.value.name = data['Category Name'];
-    console.log(data.Limit);
     CategoryToAdd.value.limitAmount = data.Limit;
-    console.log(CategoryToAdd.value);
 
     try {
       // Hinzufügen der Kategorie und warten, bis es abgeschlossen ist
