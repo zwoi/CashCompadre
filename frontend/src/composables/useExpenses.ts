@@ -20,6 +20,7 @@ export function useExpenses() {
     //error handling machen
     const addExpense = async (e:Expense , id:number, categoryName:string) => {
          try {
+            console.log("thisLog:" +categoryName);
              await addanExpense(e,id);
              await getOneCategory(categoryName);
              await getAllExpenses(categoryName);

@@ -2,7 +2,7 @@
 
 
 import { useRoute } from 'vue-router';
-import { IonPage, IonButton, IonHeader, IonItem, IonLabel, IonTitle, IonContent, IonToolbar, IonFab, IonFabButton, IonList, IonBackButton, IonButtons, IonAlert,IonIcon } from '@ionic/vue';
+import { IonPage, IonButton, IonHeader, IonItem, IonLabel, IonTitle, IonContent, IonToolbar, IonFab, IonFabButton, IonList, IonBackButton, IonButtons, IonAlert, IonIcon } from '@ionic/vue';
 import { useExpenses } from "@/composables/useExpenses";
 import { useCategory } from "@/composables/useCategory";
 import { onMounted, ref, watchEffect } from "vue";
@@ -61,7 +61,7 @@ const alertaddExpensesButtons = [{
 
 function triggerDeleteFunction(cateforyId: number, expenseId: number): void {
     if (confirm('Are you sure you want to delete this expense?')) {
-        deleteExpense(cateforyId, expenseId,categorytitle);
+        deleteExpense(cateforyId, expenseId, categorytitle);
     }
 }
 
@@ -86,14 +86,14 @@ watchEffect(() => {
     }
 });
 //Summe alles expenses hier in category
-function  sumExpenses(){
-    let sum =0;
-    if(category.value){
-    for(let i=0;i<(category.value.expenses).length;i++){
-        sum += category.value.expenses[i].amount as number;
-    
-    }
-    
+function sumExpenses() {
+    let sum = 0;
+    if (category.value) {
+        for (let i = 0; i < (category.value.expenses).length; i++) {
+            sum += category.value.expenses[i].amount as number;
+
+        }
+
     }
     return sum;
 }
@@ -116,7 +116,7 @@ function  sumExpenses(){
         </ion-header>
         <ion-content>
             <ion-list v-if="category">
-                <ion-item v-for="expense in category.expenses" :key="expense.id" >
+                <ion-item v-for="expense in category.expenses" :key="expense.id">
                     <ion-label>{{ expense.note }}</ion-label>
                     <ion-label>{{ expense.amount }}</ion-label>
                     <ion-label><ion-icon :icon="trashBinOutline" slot="end"
@@ -128,6 +128,14 @@ function  sumExpenses(){
                     <ion-label>Total</ion-label>
                     <ion-label>{{ totalAmount }}</ion-label>
                     <ion-label>Limit: {{ category.limitAmount }}</ion-label>
+                    <ion-label>
+                        Differenz: <span
+                            :class="{ 'green-text': (category.limitAmount - totalAmount) >= 0, 'red-text': (category.limitAmount - totalAmount) < 0 }">
+                            {{ category.limitAmount - totalAmount }}
+                        </span>
+                    </ion-label>
+
+
                 </ion-item>
             </ion-list>
 
@@ -146,6 +154,15 @@ function  sumExpenses(){
 </template>
 
 <style scoped>
+/* In Ihrem Stylesheet */
+.green-text {
+    color: green;
+}
+
+.red-text {
+    color: red;
+}
+
 ion-alert {
     --color: white;
 }
