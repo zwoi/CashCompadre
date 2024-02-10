@@ -25,25 +25,21 @@ import { ref } from "vue";
 import { add } from 'ionicons/icons';
 import { useExpenses } from "@/composables/useExpenses";
 import { Expense } from "@/model/expense";
-import { User, categories } from "@/model/user";
+import { User } from "@/model/user";
 import { onMounted, } from "vue";
 import { useUser } from '../composables/useUser';
 import { Category } from "@/model/category";
 import { useCategory } from "@/composables/useCategory";
 import Chart from 'chart.js/auto';
-
 const { thisuser, getUserValues, setBalance } = useUser();
 const { categories, getCategories } = useCategory();
 const text = ref('!');
-const ExpenseToAdd = ref<Expense>();
-
 let myChart; // Um die Diagramminstanz zu speichern
 
-ExpenseToAdd.value = {
-  category: 1,
-  note: 'hello',
-  amount: 1,
-};
+import { addExpenseComp } from "@/composables/addExpenseComp.vue";
+
+
+
 
 function calculateRestGeld() {
   if (thisuser.value && categories.value) {
@@ -174,6 +170,7 @@ function createChart() {
       <ion-alert :isOpen="showsetBalanceAlert" @didDismiss="setOpen(false)" header="Update ur Balance!"
         :buttons="alertsetBalanceCategoryButtons" :inputs="alertsetBalanceCategoryInputs">
       </ion-alert>
+
     </ion-content>
   </ion-page>
 </template>

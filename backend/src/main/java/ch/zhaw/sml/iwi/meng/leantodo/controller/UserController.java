@@ -65,6 +65,4 @@ private static final Logger LOGGER = Logger.getLogger(ClassName.class.getName())
         return userRepository.findById(loginName).get();
     }
 
-  
-
 }
