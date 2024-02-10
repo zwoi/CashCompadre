@@ -49,12 +49,8 @@ function calculateRestGeld() {
   if (thisuser.value && categories.value) {
     let restGeld = thisuser.value.balance;
     for (let i = 0; i < categories.value.length; i++) {
-      console.log("Categories: " + categories.value[i].limitAmount);
-      console.log("Cats: " + categories.value[i].name);
       restGeld -= categories.value[i].limitAmount; // Deduct the category limit
-      console.log("Restgeld: " + restGeld);
     }
-    console.log("Restgeld: " + restGeld);
     return restGeld;
   } else {
     console.log('User or categories are not defined');
