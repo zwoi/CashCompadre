@@ -17,8 +17,6 @@ export  async function getUser() {
     }
   }
 
- 
-
   export async function changeBalance(changedBalance: number) {
     const config = {
         withCredentials: true,

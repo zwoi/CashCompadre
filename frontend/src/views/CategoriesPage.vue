@@ -36,12 +36,11 @@ import {
 import { useCategory } from '../composables/useCategory';
 import { onMounted } from 'vue';
 import { Category } from "@/model/category";
-const { categories, getCategories, addNewCategory, deleteCategory, updateCategory } = useCategory();
+import { showToast } from '../composables/useToast';
 
+const { categories, getCategories, addNewCategory, deleteCategory, updateCategory } = useCategory();
 const CategoryToAdd = ref<Category>();
 const CategoryToUpdate = ref<Category>();
-
-
 
 CategoryToAdd.value = {
   name: "",
@@ -88,7 +87,7 @@ const alertupdateCategoryButtons = [{
     CategoryToUpdate.value.name = data['Category Name'];
     CategoryToUpdate.value.limitAmount = data.Limit;
     updateCategory(CategoryToUpdate.value as Category, CategoryToUpdate.value.id as number);
-    
+    showToast("Category was successfully updated!")
   },
 }];
 
@@ -100,10 +99,9 @@ const alertaddCategoryButtons = [{
     CategoryToAdd.value.limitAmount = data.Limit;
 
     try {
-      // Hinzufügen der Kategorie und warten, bis es abgeschlossen ist
       await addNewCategory(CategoryToAdd.value as Category);
-      // Nachdem die Kategorie hinzugefügt wurde, aktualisiere die Liste
       getCategories();
+      showToast('Category added successfully!');
     } catch (error) {
       console.error('Error adding category:', error);
     }
@@ -112,8 +110,6 @@ const alertaddCategoryButtons = [{
 
 onMounted(() => {
   getCategories();
-
- 
 });
 
 let showUpdateAlert = ref(false);
@@ -145,6 +141,7 @@ async function deleteCategoryFunction(id: number): Promise<void> {
   try {
     await deleteCategory(id);
     getCategories();
+    showToast('Category deleted successfully!');
   } catch (error) {
     console.error('Error deleting category:', error);
   }

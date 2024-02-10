@@ -1,15 +1,11 @@
 package ch.zhaw.sml.iwi.meng.leantodo.boundary;
-
 import java.security.Principal;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import ch.zhaw.sml.iwi.meng.leantodo.security.TokenGenerator;
 import ch.zhaw.sml.iwi.meng.leantodo.security.UserAuthResponse;
 import jakarta.servlet.http.Cookie;
@@ -44,6 +40,7 @@ public class TokenEndpoint {
         cookie.setPath("/");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
+        
     }
 
     private UserAuthResponse createTokenSetCookie(Principal principal, HttpServletResponse response) {

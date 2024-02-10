@@ -1,4 +1,4 @@
-import { getToken } from '@/api/auth';
+import { getToken, loguserout } from '@/api/auth';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -18,10 +18,21 @@ export function useLogin() {
             console.log(error)
         }
     }
+    const logout = async () => {
+        try{
+            loguserout();
+            console.log("logged out");
+            
+        }catch (error){
+            console.log(error);
+        }
+        router.push('/login')
+    }
 
     return {
         username,
         password,
-        login
+        login,
+        logout
     }
 }
